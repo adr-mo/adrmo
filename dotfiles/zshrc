@@ -1,0 +1,24 @@
+# If you come from bash you might have to change your $PATH.
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
+#
+# # ~/.zshrc
+
+eval "$(starship init zsh)"
+
+export PATH=$HOME/bin:/usr/local/bin:$HOME/.rd/bin:$PATH
+fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
+
+source ~/.zsh/zsh-autocomplete/zsh-autocomplete.plugin.zsh 
+
+plugins=(
+    git
+    docker
+    docker-compose
+    composer
+)
+
+alias c="clear"
+alias ll="ls -lah"
+alias cat="bat"
+
+
