@@ -2,13 +2,9 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 #
 # # ~/.zshrc
+export PATH=$HOME/bin:/usr/local/bin:$HOME/.rd/bin:$PATH
 
 eval "$(starship init zsh)"
-
-export PATH=$HOME/bin:/usr/local/bin:$HOME/.rd/bin:$PATH
-fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
-
-source ~/.zsh/zsh-autocomplete/zsh-autocomplete.plugin.zsh 
 
 plugins=(
     git
@@ -20,5 +16,16 @@ plugins=(
 alias c="clear"
 alias ll="ls -lah"
 alias cat="bat"
+alias vim="/Users/Adrien/workspace/nvim-macos/bin/nvim"
+alias nvim="/Users/Adrien/workspace/nvim-macos/bin/nvim"
+alias create-pr="gh pr create --web"
+alias t="tmux"
+alias lg="lazygit"
+alias ls='colorls --dark' 
+alias ll='colorls --dark -l'
+export PATH=$PATH:/Users/Adrien/.spicetify
+source $(dirname $(gem which colorls))/tab_complete.sh
 
-
+### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
+export PATH="/Users/Adrien/.rd/bin:$PATH"
+### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
