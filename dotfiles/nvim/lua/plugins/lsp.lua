@@ -10,6 +10,10 @@ local on_attach = function (client, bufnr)
     vim.keymap.set('n', 'gr', ':Telescope lsp_references<CR>')
     vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>')
     vim.keymap.set('n', '<Leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>')
+
+    if client.name == 'intelephense' then
+        vim.keymap.set('n', 'gi', '<cmd>:PhpactorGotoImplementations<CR>')
+    end
 end
 
 local languages = {
