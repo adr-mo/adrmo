@@ -48,3 +48,4 @@ opt.backup = false
 opt.writebackup = false
 opt.undofile = false
 opt.swapfile = false
+vim.cmd([[ set colorcolumn=120 ]])

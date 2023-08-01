@@ -27,4 +27,4 @@ keymap.set('v', '>', '>gv')
 -- save
 keymap.set("n", "<Leader>w", ":write<CR>", { noremap = true, silent = true })
 
--- hardcore mod ON / remove the keys for arrows navigation
+keymap.set('n', '<leader>z', ':ZenMode<CR>', { noremap = true, silent = true })

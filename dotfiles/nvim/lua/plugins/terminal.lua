@@ -7,4 +7,4 @@ return {
             require('toggleterm').setup()
         end
     }
-} 
+}

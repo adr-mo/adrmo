@@ -5,33 +5,23 @@ $directory\
 $git_branch\
 $git_state\
 $git_status\
-$cmd_duration\
 $character"""
 
-[character]
-error_symbol = "[](bold #ff5555)"
-success_symbol = "[](bold #50fa7b)"
-
-[cmd_duration]
-style = "bold #f1fa8c"
-
 [directory]
-style = "bold #50fa7b"
+style = "blue"
+
+[character]
+success_symbol = "[❯](purple)"
+error_symbol = "[❯](red)"
+vimcmd_symbol = "[❮](green)"
 
 [git_branch]
 format = "[$branch]($style)"
-style = "bold #ff79c6"
-
-[hostname]
-style = "bold #bd93f9"
-
-[username]
-format = "[$user]($style) on "
-style_user = "bold #8be9fd"
+style = "bright-black"
 
 [git_status]
 format = "[[(*$conflicted$untracked$modified$staged$renamed$deleted)](218) ($ahead_behind$stashed)]($style)"
-style = "bold #ff5555"
+style = "cyan"
 conflicted = "​"
 untracked = "​"
 modified = "​"
@@ -42,4 +32,12 @@ stashed = "≡"
 
 [git_state]
 format = '\([$state( $progress_current/$progress_total)]($style)\) '
+style = "bright-black"
+
+[cmd_duration]
+format = "[$duration]($style) "
+style = "yellow"
+
+[python]
+format = "[$virtualenv]($style) "
 style = "bright-black"

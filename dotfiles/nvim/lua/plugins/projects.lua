@@ -1,18 +1,5 @@
 return {
     {
-        "christoomey/vim-tmux-navigator",
-        init = function ()
-            vim.keymap.set("n", "<leader>sm", ":MaximizerToggle<CR>") -- toggle split window maximization
-        end
-    },
-    {
-        "szw/vim-maximizer",
-        init = function ()
-              vim.g.maximizer_set_default_mapping = 0
-              vim.g.maximizer_default_mapping_key = ''
-        end
-    },
-    {
         "ahmedkhalf/project.nvim",
         config = function ()
             require('project_nvim').setup({
