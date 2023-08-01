@@ -39,8 +39,8 @@ return {
 
             telescope.setup({
                 defaults = {
-                    path_display = { truncate = 1 },
                     prompt_prefix = '   ',
+                    path_display = {'smart'},
                     selection_caret = '  ',
                     layout_config = {
                         prompt_position = 'top',
@@ -49,28 +49,33 @@ return {
                     mappings = {
                         i = {
                             ['<esc>'] = actions.close,
-                            ['<C-Down>'] = actions.cycle_history_next,
-                            ['<C-Up>'] = actions.cycle_history_prev,
+                            ['<C-k>'] = actions.move_selection_previous,
+                            ['<C-j>'] = actions.move_selection_next,
                         },
                     },
-                    file_ignore_patterns = { '.git/' },
+                    file_ignore_patterns = { '.git/', 'vendor/', 'node_modules/' },
                 },
                 pickers = {
                     find_files = {
+                        prompt_title = 'Find files',
+                        prompt_prefix = ' 󰱼 ',
                         hidden = true,
                     },
                     buffers = {
-                        previewer = false,
-                        layout_config = {
-                            width = 80,
-                        },
+                        prompt_title = 'Opened files',
+                        prompt_prefix = '  '
                     },
                     oldfiles = {
-                        prompt_title = 'History',
+                        prompt_title = 'Recent Files',
+                        prompt_prefix = ' 󰙰 '
                     },
                     lsp_references = {
                         previewer = false,
                     },
+                    live_grep = {
+                        prompt_title = 'Search in files',
+                        prompt_prefix = ' 󱎸 '
+                    }
                 },
             })
         end,
