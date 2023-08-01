@@ -50,7 +50,7 @@ return {
     },
     {
         "nvim-lualine/lualine.nvim",
-        config = function ()
+        config = function()
             require('lualine').setup({
                 -- options = {
                 --     theme = 'rose-pine'
@@ -61,10 +61,26 @@ return {
     {
         "j-hui/fidget.nvim",
         tag = 'legacy',
-        config = function ()
+        config = function()
             require("fidget").setup()
         end
 
     },
     { 'Mofiqul/dracula.nvim' },
+    {
+        'sunjon/shade.nvim',
+        config = function()
+            local shade = require('shade')
+            shade.setup({
+                overlay_opacity = 30,
+                opacity_step = 1,
+                keys = {
+                    -- brightness_up    = '<C-Up>',
+                    -- brightness_down  = '<C-Down>',
+                    -- toggle           = '<Leader>s',
+                }
+            })
+        end
+    }
+
 }
