@@ -25,6 +25,12 @@ keymap.set('v', '<', '<gv')
 keymap.set('v', '>', '>gv')
 
 -- save
-keymap.set("n", "<Leader>w", ":write<CR>", { noremap = true, silent = true })
+keymap.set('n', '<C-s>', '<cmd> w <CR>')
 
 keymap.set('n', '<leader>z', ':ZenMode<CR>', { noremap = true, silent = true })
+keymap.set('n', '<leader>tt', ":lua require('FTerm').toggle()<CR>")
+keymap.set('n', '<leader>gd', ":Neogen <CR>")
+keymap.set('i', '<C-h>', '<Left>')
+keymap.set('i', '<C-l>', '<Right>')
+keymap.set('i', '<C-k>', '<Up>')
+keymap.set('i', '<C-j>', '<Down>')

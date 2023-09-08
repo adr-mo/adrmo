@@ -8,7 +8,7 @@ return {
                 -- * an absolute number of cells when > 1
                 -- * a percentage of the width / height of the editor when <= 1
                 -- * a function that returns the width or the height
-                width = .85, -- width will be 85% of the editor width
+                width = .99, -- width will be 85% of the editor width
                 height = 1, -- height of the Zen window
                 -- by default, no options are changed for the Zen window
                 -- uncomment any of the options below, or add other vim.wo options you want to apply
@@ -31,7 +31,7 @@ return {
                     showcmd = false, -- disables the command in the last line of the screen
                 },
                 twilight = { enabled = true }, -- enable to start Twilight when zen mode opens
-                gitsigns = { enabled = false }, -- disables git signs
+                gitsigns = { enabled = true }, -- disables git signs
                 tmux = { enabled = true }, -- disables the tmux statusline
                 -- this will change the font size on kitty when in zen mode
                 -- to make this work, you need to set the following kitty options:

@@ -9,8 +9,8 @@ return {
             "hrsh7th/cmp-nvim-lua",
             "hrsh7th/cmp-path",
             "hrsh7th/cmp-cmdline",
-            "L3MON4D3/LuaSnip",
             "onsails/lspkind.nvim",
+            "L3MON4D3/LuaSnip",
         },
         config = function()
             local lspkind = require("lspkind")
@@ -92,11 +92,6 @@ return {
                 view = {
                     entries = { name = "custom", selection_order = "near_cursor" },
                 },
-
-                experimental = {
-                    ghost_text = true,
-                },
-
             })
 
             cmp.setup.cmdline({ "/", "?" }, {
@@ -113,6 +108,7 @@ return {
             })
 
             require("luasnip.loaders.from_vscode").lazy_load()
+            -- lua format
         end
     },
 }

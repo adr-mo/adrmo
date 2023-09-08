@@ -36,13 +36,17 @@ local languages = {
     "jsonls",
     "bashls",
     "marksman",
-    "intelephense"
+    "intelephense",
+    "yamlls"
 }
 
 return {
     {
         "neovim/nvim-lspconfig",
-        dependencies = { "hrsh7th/cmp-nvim-lsp", 'b0o/schemastore.nvim' },
+        dependencies = {
+            "hrsh7th/cmp-nvim-lsp",
+            'b0o/schemastore.nvim',
+        },
         config = function()
             local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
@@ -58,16 +62,43 @@ return {
                 },
             })
 
+            require('lspconfig').yamlls.setup({
+                capabilities = capabilities,
+                settings = {
+                    yaml = {
+                        schemastore = {
+                            enable = false,
+                            url = '',
+                        },
+                        schemas = require('schemastore').yaml.schemas(),
+                    }
+                }
+            })
+
             require('lspconfig').jsonls.setup({
                 capabilities = capabilities,
                 settings = {
                     json = {
                         schemas = require('schemastore').json.schemas(),
+                        validate = { enable = true }
                     },
                 },
             })
 
-            require('lspconfig').intelephense.setup({ capabilities = capabilities })
+            require('lspconfig').intelephense.setup({
+                commands = {
+                    IntelephenseIndex = {
+                        function()
+                            vim.lsp.buf.execute_command({ command = 'intelephense.index.workspace' })
+                        end,
+                    },
+                },
+                on_attach = function(client, bufnr)
+                    client.server_capabilities.documentFormattingProvider = false
+                    client.server_capabilities.documentRangeFormattingProvider = false
+                end,
+                capabilities = capabilities
+            })
 
             for _, language in pairs(languages) do
                 require("lspconfig")[language].setup({
@@ -112,7 +143,8 @@ return {
                         diagnostics_format = "#{m} (#{c}) [#{s}]", -- Makes PHPCS errors more readeable
                         only_local = "vendor/bin",
                         command = 'phpstan',
-                        args = { "analyze", "--configuration=phpstan.core.neon", "--error-format", "json", "--no-progress", "--level", "max", "$FILENAME" },
+                        args = { "analyze", "--configuration=phpstan.core.neon", "--error-format", "json",
+                            "--no-progress", "--level", "max", "$FILENAME" },
                     }),
 
                     -- Prettier and spelling

@@ -1,45 +1,95 @@
 return {
-    {
-        "goolord/alpha-nvim",
-        event = 'VimEnter',
-        config = function()
-            local dashboard = require("alpha.themes.dashboard")
-            dashboard.section.header.val = {
-                [[                               __                ]],
-                [[  ___     ___    ___   __  __ /\_\    ___ ___    ]],
-                [[ / _ `\  / __`\ / __`\/\ \/\ \\/\ \  / __` __`\  ]],
-                [[/\ \/\ \/\  __//\ \_\ \ \ \_/ |\ \ \/\ \/\ \/\ \ ]],
-                [[\ \_\ \_\ \____\ \____/\ \___/  \ \_\ \_\ \_\ \_\]],
-                [[ \/_/\/_/\/____/\/___/  \/__/    \/_/\/_/\/_/\/_/]],
+    'glepnir/dashboard-nvim',
+    event = 'VimEnter',
+    config = function()
+        local db = require('dashboard')
+        db.setup({
+            theme = 'doom',
+                -- dashboard.button("f", "  Find file", ":Telescope find_files theme=ivy<CR>"),
+                -- dashboard.button("e", "  New file", ":ene <BAR> startinsert <CR>"),
+                -- dashboard.button("p", "  Find project", ":Telescope projects theme=ivy<CR>"),
+                -- dashboard.button("r", "󰙰  Recently used files", ":Telescope oldfiles theme=ivy<CR>"),
+                -- dashboard.button("t", "󰊄  Find text", ":Telescope live_grep theme=ivy<CR>"),
+                -- dashboard.button('b', "  Browse directory", ":Telescope file_browser path=%:p:h theme=ivy<CR>"),
+                -- dashboard.button("c", "  Configuration", ":e ~/.config/nvim/init.lua <CR>"),
+                -- dashboard.button("q", "󰩈  Quit Neovim", ":qa<CR>"),
+            config = {
+                header = {
+                    '',
+                    '',
+                    '',
+                    '',
+                    '',
+                    '',
+                    '',
+                    '',
+                    '',
+                    '',
+                    '',
+                    '',
+                    '',
+                    '',
+                    ' ##### ###### ### ### ###### #####   ######  ####  ### ### ',
+                    '##  ##  ##  #  ##  #  # ## #  ## ##   ##  # ##  ##  ##  #  ',
+                    '##      ##     ### #    ##    ## ##   ##    ##  ##  ### #  ',
+                    '##      ###    # # #    ##    ####    ###   ##  ##  # # #  ',
+                    '##      ##     # ###    ##    ## #    ##    ##  ##  # ###  ',
+                    '### ##  ##  #  #  ##    ##    ## ##   ##  # ##  ##  #  ##  ',
+                    ' ####  ###### ###  #   ####  ### ### ######  ####  ###  #  ',
+                    ''
+                },
+                center = {
+                -- dashboard.button("f", "  Find file", ":Telescope find_files theme=ivy<CR>"),
+                -- dashboard.button("e", "  New file", ":ene <BAR> startinsert <CR>"),
+                -- dashboard.button("p", "  Find project", ":Telescope projects theme=ivy<CR>"),
+                -- dashboard.button("r", "󰙰  Recently used files", ":Telescope oldfiles theme=ivy<CR>"),
+                -- dashboard.button("t", "󰊄  Find text", ":Telescope live_grep theme=ivy<CR>"),
+                -- dashboard.button('b', "  Browse directory", ":Telescope file_browser path=%:p:h theme=ivy<CR>"),
+                -- dashboard.button("c", "  Configuration", ":e ~/.config/nvim/init.lua <CR>"),
+                -- dashboard.button("q", "󰩈  Quit Neovim", ":qa<CR>"),
+                    {
+                        icon = ' ',
+                        icon_hl = 'Title',
+                        desc = 'Find File           ',
+                        desc_hl = 'String',
+                        key = 'f',
+                        keymap = 'SPC f f',
+                        key_hl = 'Number',
+                        action = 'Telescope find_files'
+                    },
+                    {
+                        icon = ' ',
+                        icon_hl = 'Title',
+                        desc = 'Find Project           ',
+                        desc_hl = 'String',
+                        key = 'p',
+                        keymap = 'SPC f p',
+                        key_hl = 'Number',
+                        action = 'Telescope projects'
+                    },
+                    {
+                        icon = '󰊄 ',
+                        icon_hl = 'Title',
+                        desc = 'Find Text           ',
+                        desc_hl = 'String',
+                        key = 't',
+                        keymap = 'SPC f g',
+                        key_hl = 'Number',
+                        action = 'Telescope live_grep'
+                    },
+                    {
+                        icon = '󰩈 ',
+                        icon_hl = 'Title',
+                        desc = 'Quit Neovim           ',
+                        desc_hl = 'String',
+                        key = 'q',
+                        key_hl = 'Number',
+                        action = ':qa'
+                    },
+                },
+                footer = {} --your footer
             }
-            dashboard.section.buttons.val = {
-                dashboard.button("f", "  Find file", ":Telescope find_files <CR>"),
-                dashboard.button("e", "  New file", ":ene <BAR> startinsert <CR>"),
-                dashboard.button("p", "  Find project", ":Telescope projects <CR>"),
-                dashboard.button("r", "󰙰  Recently used files", ":Telescope oldfiles <CR>"),
-                dashboard.button("t", "  Find text", ":Telescope live_grep <CR>"),
-                dashboard.button('b', "  Browse directory", ":Telescope file_browser path=%:p:h select_buffer=true <CR>"),
-                dashboard.button("c", "  Configuration", ":e ~/.config/nvim/init.lua <CR>"),
-                dashboard.button("q", "  Quit Neovim", ":qa<CR>"),
-            }
-
-            local function footer()
-                -- NOTE: requires the fortune-mod package to work
-                -- local handle = io.popen("fortune")
-                -- local fortune = handle:read("*a")
-                -- handle:close()
-                -- return fortune
-                return ""
-            end
-
-            dashboard.section.footer.val = footer()
-
-            dashboard.section.footer.opts.hl = "Type"
-            dashboard.section.header.opts.hl = "Include"
-            dashboard.section.buttons.opts.hl = "Keyword"
-
-            dashboard.opts.opts.noautocmd = true
-            require('alpha').setup(dashboard.opts)
-        end,
-    },
+        })
+    end,
+    dependencies = { { 'nvim-tree/nvim-web-devicons' } }
 }

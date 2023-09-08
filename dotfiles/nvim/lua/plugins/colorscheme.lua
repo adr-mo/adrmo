@@ -1,14 +1,13 @@
 return {
-     {
+    {
         'rose-pine/neovim',
         name = 'rose-pine',
-        config = function ()
-            local rose = require('rose-pine')
-            rose.setup({
+        init = function()
+            require('rose-pine').setup({
                 --- @usage 'auto'|'main'|'moon'|'dawn'
                 variant = 'moon',
                 --- @usage 'main'|'moon'|'dawn'
-                dark_variant = 'main',
+                dark_variant = 'moon',
                 bold_vert_split = false,
                 dim_nc_background = true,
                 disable_background = false,
@@ -61,5 +60,5 @@ return {
 
             vim.cmd('colorscheme rose-pine')
         end
-     }
+    }
 }
