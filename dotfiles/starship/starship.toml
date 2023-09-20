@@ -1,43 +1,58 @@
 format = """
+[](#56949f)\
+$os\
 $username\
-$hostname\
+[](bg:#d7827e fg:#56949f)\
 $directory\
+[](fg:#d7827e bg:#ea9d34)\
 $git_branch\
-$git_state\
-$git_status\
-$character"""
+[](fg:#ea9d34) \
+"""
+
+# Disable the blank line at the start of the prompt
+# add_newline = false
+
+# You can also replace your username with a neat symbol like   or disable this
+# and use the os module below
+[username]
+show_always = true
+style_user = "bg:#56949f"
+style_root = "bg:#56949f"
+format = '[$user ]($style)'
+disabled = false
+
+[os]
+style = "bg:#56949f"
+disabled = false # Disabled by default
+
+[os.symbols]
+Macos = " "
 
 [directory]
-style = "blue"
+style = "bg:#d7827e"
+format = "[ $path ]($style)"
+truncation_length = 3
+truncation_symbol = "…/"
 
-[character]
-success_symbol = "[❯](purple)"
-error_symbol = "[❯](red)"
-vimcmd_symbol = "[❮](green)"
+# Here is how you can shorten some long paths by text replacement
+# similar to mapped_locations in Oh My Posh:
+[directory.substitutions]
+"Documents" = " "
+"Downloads" = " "
+"Music" = " "
+"Pictures" = " "
+# Keep in mind that the order matters. For example:
+# "Important Documents" = "  "
+# will not be replaced, because "Documents" was already substituted before.
+# So either put "Important Documents" before "Documents" or use the substituted version:
+# "Important  " = "  "
 
 [git_branch]
-format = "[$branch]($style)"
-style = "bright-black"
+symbol = ""
+style = "bg:#ea9d34"
+format = '[ $symbol $branch ]($style)'
 
 [git_status]
-format = "[[(*$conflicted$untracked$modified$staged$renamed$deleted)](218) ($ahead_behind$stashed)]($style)"
-style = "cyan"
-conflicted = "​"
-untracked = "​"
-modified = "​"
-staged = "​"
-renamed = "​"
-deleted = "​"
-stashed = "≡"
+style = "bg:#ea9d34"
+format = '[$all_status$ahead_behind ]($style)'
 
-[git_state]
-format = '\([$state( $progress_current/$progress_total)]($style)\) '
-style = "bright-black"
-
-[cmd_duration]
-format = "[$duration]($style) "
-style = "yellow"
-
-[python]
-format = "[$virtualenv]($style) "
-style = "bright-black"

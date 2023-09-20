@@ -16,7 +16,7 @@ return {
         init = function()
             vim.keymap.set('n', '<leader>fb', "<cmd>Telescope buffers <CR>")
             vim.keymap.set('n', '<leader>fg',
-                "<cmd>lua require('telescope').extensions.live_grep_args.live_grep_args(require('telescope.themes').get_ivy({}))<CR>")
+                "<cmd>lua require('telescope.builtin').live_grep({ additional_args = { '-j1' }})<CR>")
             vim.keymap.set('n', '<leader>fh', "<cmd>lua require('telescope.builtin').oldfiles()<CR>")
             vim.keymap.set('n', '<leader>fs',
                 "<cmd>lua require('telescope.builtin').lsp_document_symbols(require('telescope.themes').get_ivy({}))<CR>")
