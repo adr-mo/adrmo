@@ -1,12 +1,12 @@
 format = """
-[](#56949f)\
+[](#6272a4)\
 $os\
 $username\
-[](bg:#d7827e fg:#56949f)\
+[](bg:#ff5555 fg:#6272a4)\
 $directory\
-[](fg:#d7827e bg:#ea9d34)\
+[](fg:#ff5555 bg:#50fa7b)\
 $git_branch\
-[](fg:#ea9d34) \
+[](fg:#50fa7b) \
 """
 
 # Disable the blank line at the start of the prompt
@@ -16,20 +16,20 @@ $git_branch\
 # and use the os module below
 [username]
 show_always = true
-style_user = "bg:#56949f"
-style_root = "bg:#56949f"
+style_user = "bg:#6272a4"
+style_root = "bg:#6272a4"
 format = '[$user ]($style)'
 disabled = false
 
 [os]
-style = "bg:#56949f"
+style = "bg:#6272a4"
 disabled = false # Disabled by default
 
 [os.symbols]
 Macos = " "
 
 [directory]
-style = "bg:#d7827e"
+style = "bg:#ff5555"
 format = "[ $path ]($style)"
 truncation_length = 3
 truncation_symbol = "…/"
@@ -49,10 +49,10 @@ truncation_symbol = "…/"
 
 [git_branch]
 symbol = ""
-style = "bg:#ea9d34"
+style = "bg:#50fa7b"
 format = '[ $symbol $branch ]($style)'
 
 [git_status]
-style = "bg:#ea9d34"
+style = "bg:#50fa7b"
 format = '[$all_status$ahead_behind ]($style)'
 

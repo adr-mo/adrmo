@@ -2,7 +2,7 @@ return {
     {
         "nvim-lualine/lualine.nvim",
         opts = {
-            theme = "rose-pine",
+            theme = "dracula-nvim",
             disabled_filetypes = { 'NVimTree' }
         },
     }

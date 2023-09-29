@@ -23,7 +23,6 @@ return {
             vim.keymap.set('n', '<leader>ff', '<cmd>Telescope find_files <CR>')
             vim.keymap.set("n", "<leader>fk", "<cmd>Telescope keymaps <cr>")
             vim.keymap.set("n", "<leader>fc", "<cmd>Telescope commands <cr>")
-            vim.keymap.set("n", "<leader>fp", "<cmd>Telescope projects <cr>")
             vim.keymap.set("n", "<leader>ft", "<cmd>Telescope treesitter <cr>")
             vim.keymap.set("n", "<leader>fC", "<cmd>Telescope colorscheme <cr>")
             vim.keymap.set("n", "<leader>fl", "<cmd>Telescope luasnip <cr>")

@@ -8,7 +8,7 @@ vim.keymap.set(
 local on_attach = function(client, bufnr)
     vim.keymap.set("n", "<Leader>d", vim.diagnostic.open_float, options)
     vim.keymap.set("n", "<Leader>a", vim.lsp.buf.code_action, options)
-    vim.keymap.set('n', '<Leader>d', '<cmd>lua vim.diagnostic.open_float()<CR>')
+    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
     vim.keymap.set('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>')
     vim.keymap.set('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>')
     vim.keymap.set('n', 'gd', '<cmd>:Telescope lsp_definitions<CR>')
@@ -16,18 +16,13 @@ local on_attach = function(client, bufnr)
     vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>')
     vim.keymap.set('n', '<Leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>')
     vim.keymap.set('n', '<leader>lf', '<cmd>lua vim.lsp.buf.format()<CR>')
-
-    if client.name == 'intelephense' then
-        vim.keymap.set('n', 'gi', '<cmd>:PhpactorGotoImplementations<CR>')
-        vim.keymap.set('n', '<Leader>ca', '<cmd>:PhpactorTransform<CR>')
-        vim.keymap.set("n", "<Leader>a", '<cmd>:PhpactorContextMenu<CR>', options)
-        vim.keymap.set(
-            'n',
-            '<leader>dfc',
-            "<cmd>:! echo \"Fixing coding style issues\" ; ./vendor/bin/php-cs-fixer --config=.php-cs-fixer.dist.php --quiet fix %<cr>"
-        )
-    end
 end
+
+vim.keymap.set(
+    'n',
+    '<leader>dfc',
+    "<cmd>:! echo \"Fixing coding style issues\" ; ./vendor/bin/php-cs-fixer --config=.php-cs-fixer.dist.php --quiet fix %<cr>"
+)
 
 local languages = {
     "lua_ls",
@@ -93,10 +88,7 @@ return {
                         end,
                     },
                 },
-                on_attach = function(client, bufnr)
-                    client.server_capabilities.documentFormattingProvider = false
-                    client.server_capabilities.documentRangeFormattingProvider = false
-                end,
+                on_attach = on_attach,
                 capabilities = capabilities
             })
 
@@ -167,3 +159,4 @@ return {
         run = 'composer install --no-dev -o'
     }
 }
+
