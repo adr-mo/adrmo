@@ -4,9 +4,9 @@ $os\
 $username\
 [](bg:#ff5555 fg:#6272a4)\
 $directory\
-[](fg:#ff5555 bg:#50fa7b)\
+[](fg:#ff5555 bg:#bd93f9)\
 $git_branch\
-[](fg:#50fa7b) \
+[](fg:#bd93f9) \
 """
 
 # Disable the blank line at the start of the prompt
@@ -49,10 +49,10 @@ truncation_symbol = "…/"
 
 [git_branch]
 symbol = ""
-style = "bg:#50fa7b"
+style = "bg:#bd93f9"
 format = '[ $symbol $branch ]($style)'
 
 [git_status]
-style = "bg:#50fa7b"
+style = "bg:#bd93f9"
 format = '[$all_status$ahead_behind ]($style)'
 

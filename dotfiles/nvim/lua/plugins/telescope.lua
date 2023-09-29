@@ -11,7 +11,8 @@ return {
             "nvim-telescope/telescope-github.nvim",
             "tpope/vim-fugitive",
             'tpope/vim-rhubarb',
-            "aaronhallaert/advanced-git-search.nvim"
+            "aaronhallaert/advanced-git-search.nvim",
+            "lpoto/telescope-docker.nvim",
         },
         init = function()
             vim.keymap.set('n', '<leader>fb', "<cmd>Telescope buffers <CR>")
@@ -28,6 +29,7 @@ return {
             vim.keymap.set("n", "<leader>fl", "<cmd>Telescope luasnip <cr>")
             vim.keymap.set("n", "<leader>fG", "<cmd>Telescope gh pull_request <cr>")
             vim.keymap.set('n', '<leader>fi', '<cmd>AdvancedGitSearch<CR>', { desc = "AdvancedGitSearch" })
+            vim.keymap.set('n', '<leader>dk', '<cmd>Telescope docker<CR>', { desc = 'Docker'})
         end,
         config = function()
             local telescope = require('telescope')
@@ -38,6 +40,7 @@ return {
             telescope.load_extension('luasnip')
             telescope.load_extension('gh')
             telescope.load_extension('advanced_git_search')
+            telescope.load_extension('docker')
 
             telescope.setup({
                 defaults = {
@@ -47,7 +50,7 @@ return {
                     layout_config = {
                         prompt_position = 'top',
                     },
-                   sorting_strategy = 'ascending',
+                    sorting_strategy = 'ascending',
                     mappings = {
                         i = {
                             ['<C-k>'] = actions.move_selection_previous,
@@ -58,6 +61,7 @@ return {
                     pickers = {
                         find_files = {
                             hidden = true,
+                            previewer = false,
                         },
                         buffers = {
                             previewer = false,
@@ -78,7 +82,25 @@ return {
                             symbol_width = 55,
                         },
                     },
-                    file_ignore_patterns = { '.git/', 'vendor/', 'node_modules/' },
+                    file_ignore_patterns = { '.git/', 'node_modules/' },
+                },
+                extensions = {
+                    -- NOTE: this setup is optional
+                    docker = {
+                        -- These are the default values
+                        theme = "ivy",
+                        binary = "docker", -- in case you want to use podman or something
+                        compose_binary = "docker compose",
+                        buildx_binary = "docker buildx",
+                        machine_binary = "docker-machine",
+                        log_level = vim.log.levels.INFO,
+                        init_term = "tabnew", -- "vsplit new", "split new", ...
+                        -- NOTE: init_term may also be a function that receives
+                        -- a command, a table of env. variables and cwd as input.
+                        -- This is intended only for advanced use, in case you want
+                        -- to send the env. and command to a tmux terminal or floaterm
+                        -- or something other than a built in terminal.
+                    },
                 },
             })
         end,

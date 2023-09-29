@@ -1,9 +1,12 @@
 return {
     {
         'rcarriga/nvim-notify',
-        opts = {},
+        opts = {
+            render = 'wrapped-compact',
+            stages = 'slide'
+        },
         config = function()
-            vim.notify = require("notify")
+            vim.notify = require('notify')
         end
     },
 }

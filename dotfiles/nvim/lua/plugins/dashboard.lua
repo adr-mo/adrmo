@@ -53,6 +53,13 @@ return {
                             keymap = 'SPC f g',
                             action = "lua require('telescope.builtin').live_grep({ additional_args = { '-j1' }})"
                         },
+                        {
+                            icon = '󱝥 ',
+                            desc = 'Recently edited',
+                            key = 'r',
+                            keymap = 'SPC f h',
+                            action = "Telescope oldfiles"
+                        },
                     },
                     footer = {} --your footer
                 }
