@@ -67,16 +67,24 @@ local function _docker_cp_choose_source()
     vim.ui.input({ prompt = 'Source to copy on container', default = vim.fn.expand('%') }, function(input) _docker_cp_choose_destination(input) end)
 end
 
+local function _docker_enter()
+    require('toggleterm').exec(
+       "docker exec -ti $(docker ps -qa) bash"
+    )
+end
+
 local cases = {
     ['phpstan'] = _phpstan_choose_type,
     ['php-cs-fixer'] = _php_cs_fixer_choose_type,
-    ['docker-cp'] = _docker_cp_choose_source
+    ['docker-cp'] = _docker_cp_choose_source,
+    ['docker-enter'] = _docker_enter
 }
 
 local choices = {
     'phpstan',
     'php-cs-fixer',
-    'docker-cp'
+    'docker-cp',
+    'docker-enter'
 }
 
 local selectDevOptions = function()
