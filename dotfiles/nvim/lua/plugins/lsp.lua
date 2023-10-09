@@ -1,4 +1,5 @@
 local options = { noremap = true, silent = true }
+
 vim.keymap.set(
     'n',
     '<leader>df',
@@ -16,6 +17,7 @@ local on_attach = function(client, bufnr)
     vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>')
     vim.keymap.set('n', '<Leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>')
     vim.keymap.set('n', '<leader>lf', '<cmd>lua vim.lsp.buf.format()<CR>')
+    vim.keymap.set('n', '<C-K>', vim.lsp.buf.signature_help, 'Signature Documentation')
 end
 
 vim.keymap.set(
@@ -32,7 +34,8 @@ local languages = {
     "bashls",
     "marksman",
     "intelephense",
-    "yamlls"
+    "yamlls",
+    "sqlls"
 }
 
 return {
@@ -99,7 +102,6 @@ return {
                 })
             end
 
-
             vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
                 vim.lsp.diagnostic.on_publish_diagnostics, {
                     virtual_text = true
@@ -123,40 +125,5 @@ return {
         end
     },
     { "williamboman/mason-lspconfig.nvim" },
-    {
-        "jose-elias-alvarez/null-ls.nvim",
-        config = function()
-            local null_ls = require('null-ls')
-            null_ls.setup({
-                debug = true,
-                sources = {
-                    -- PHPStan + php-cs-fixer
-                    null_ls.builtins.diagnostics.phpstan.with({    -- Use the local installation first
-                        diagnostics_format = "#{m} (#{c}) [#{s}]", -- Makes PHPCS errors more readeable
-                        only_local = "vendor/bin",
-                        command = 'phpstan',
-                        args = { "analyze", "--configuration=phpstan.core.neon", "--error-format", "json",
-                            "--no-progress", "--level", "max", "$FILENAME" },
-                    }),
-
-                    -- Prettier and spelling
-                    -- null_ls.builtins.formatting.prettierd,
-                    -- null_ls.builtins.completion.spell, -- You still need to execute `:set spell`
-                }
-            })
-        end
-    },
-    {
-        "jayp0521/mason-null-ls.nvim",
-        config = function()
-            require('mason-null-ls').setup({
-                automatic_installation = true,
-            })
-        end
-    },
-    {
-        "phpactor/phpactor",
-        run = 'composer install --no-dev -o'
-    }
 }
 

@@ -42,7 +42,6 @@ keymap.set('n', '<C-s>', '<cmd> w <CR>')
 
 keymap.set('n', '<leader>z', ':ZenMode<CR>', { noremap = true, silent = true })
 keymap.set('n', '<leader>tt', "<cmd>ToggleTerm direction=float<CR>")
-keymap.set('n', '<leader>gd', ":Neogen <CR>")
 keymap.set('i', '<C-h>', '<Left>')
 keymap.set('i', '<C-l>', '<Right>')
 keymap.set('i', '<C-k>', '<Up>')

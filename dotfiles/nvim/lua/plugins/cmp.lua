@@ -11,6 +11,8 @@ return {
             "hrsh7th/cmp-cmdline",
             "onsails/lspkind.nvim",
             "L3MON4D3/LuaSnip",
+            "hrsh7th/cmp-nvim-lsp-signature-help",
+            { 'kristijanhusak/vim-dadbod-completion', ft = { 'sql', 'mysql', 'plsql' }, lazy = true },
         },
         config = function()
             local lspkind = require("lspkind")

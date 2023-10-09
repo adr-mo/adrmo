@@ -29,7 +29,7 @@ return {
             vim.keymap.set("n", "<leader>fl", "<cmd>Telescope luasnip <cr>")
             vim.keymap.set("n", "<leader>fG", "<cmd>Telescope gh pull_request <cr>")
             vim.keymap.set('n', '<leader>fi', '<cmd>AdvancedGitSearch<CR>', { desc = "AdvancedGitSearch" })
-            vim.keymap.set('n', '<leader>dk', '<cmd>Telescope docker<CR>', { desc = 'Docker'})
+            vim.keymap.set('n', '<leader>dk', '<cmd>Telescope docker<CR>', { desc = 'Docker' })
         end,
         config = function()
             local telescope = require('telescope')
@@ -47,6 +47,7 @@ return {
                     prompt_prefix = '   ',
                     path_display = { truncate = 1 },
                     selection_caret = '  ',
+                    border = false,
                     layout_config = {
                         prompt_position = 'top',
                     },
@@ -58,37 +59,43 @@ return {
                             ['<C-d>'] = actions.delete_buffer
                         },
                     },
-                    pickers = {
-                        find_files = {
-                            hidden = true,
-                            previewer = false,
-                        },
-                        buffers = {
-                            previewer = false,
-                            layout_config = {
-                                width = 80,
-                            },
-                        },
-                        oldfiles = {
-                            prompt_title = 'History',
-                        },
-                        lsp_references = {
-                            previewer = false,
-                        },
-                        lsp_definitions = {
-                            previewer = false,
-                        },
-                        lsp_document_symbols = {
-                            symbol_width = 55,
+                    file_ignore_patterns = { '.git/', 'node_modules/' },
+                },
+                pickers = {
+                    find_files = {
+                        theme = 'dropdown',
+                        prompt_title = 'Find files',
+                        hidden = true,
+                        previewer = false,
+                        layout_config = {
+                            width = 0.6,
                         },
                     },
-                    file_ignore_patterns = { '.git/', 'node_modules/' },
+                    buffers = {
+                        previewer = false,
+                        layout_config = {
+                            width = 80,
+                        },
+                    },
+                    oldfiles = {
+                        prompt_title = 'History',
+                    },
+                    lsp_references = {
+                        previewer = false,
+                    },
+                    lsp_definitions = {
+                        previewer = false,
+                    },
+                    lsp_document_symbols = {
+                        symbol_width = 55,
+                        previewer = false
+                    },
                 },
                 extensions = {
                     -- NOTE: this setup is optional
                     docker = {
                         -- These are the default values
-                        theme = "ivy",
+                        theme = "dropdown",
                         binary = "docker", -- in case you want to use podman or something
                         compose_binary = "docker compose",
                         buildx_binary = "docker buildx",
