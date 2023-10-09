@@ -45,37 +45,37 @@ return {
                 -- Change specific vim highlight groups
                 -- https://github.com/rose-pine/neovim/wiki/Recipes
                 highlight_groups = {
-                    ColorColumn = { bg = 'love' },
-                    TelescopePromptBorder = { bg = 'base', fg = 'love' },
-                    TelescopeBorder = { bg = 'base', fg = 'love' },
-                    TelescopePromptNormal = { fg = 'love', bg = 'base' },
-                    TelescopePromptCounter = { bg = 'base', fg = 'love' },
-                    TelescopePromptPrefix = { fg = 'love', bg = 'base' },
-                    TelescopePromptTitle = { fg = 'love', bg = 'base' },
-                    TelescopePreviewTitle = { fg = 'love', bg = 'base' },
+                    ColorColumn = { bg = 'pine' },
+                    TelescopePromptBorder = { bg = 'panel', fg = 'pine' },
+                    TelescopeBorder = { bg = 'panel', fg = 'pine' },
+                    TelescopePromptNormal = { fg = 'pine', bg = 'panel' },
+                    TelescopePromptCounter = { bg = 'panel', fg = 'pine' },
+                    TelescopePromptPrefix = { fg = 'pine', bg = 'panel' },
+                    TelescopePromptTitle = { fg = 'pine', bg = 'panel' },
+                    TelescopePreviewTitle = { fg = 'pine', bg = 'panel' },
                     TelescopePreviewBorder = {
-                        bg = 'base',
-                        fg = 'base'
+                        -- bg = 'rose',
+                        fg = 'panel'
                     },
                     TelescopePreviewNormal = {
-                        bg = 'base',
-                        fg = 'base'
+                        -- bg = 'rose',
+                        fg = 'panel'
                     },
-                    TelescopeResultsTitle = { fg = 'love', bg = 'base' },
-                    TelescopeMatching = { fg = 'base' },
-                    TelescopeNormal = { bg = 'base' },
-                    TelescopeSelection = { fg = 'muted', bg = 'love' },
-                    TelescopeSelectionCaret = { fg = 'love' },
-                    TelescopeResultsNormal = { bg = 'base' },
-                    TelescopeResultsBorder = { bg = 'base', fg = 'love' },
-                    -- Blend colours against the "base" background
-                    CursorLine = { bg = 'foam', blend = 10 },
-                    StatusLine = { fg = 'love', bg = 'love', blend = 10 },
+                    TelescopeResultsTitle = { fg = 'pine', bg = 'panel' },
+                    TelescopeMatching = { fg = 'panel' },
+                    TelescopeNormal = { bg = 'panel' },
+                    TelescopeSelection = { bg = 'pine' },
+                    TelescopeSelectionCaret = { fg = 'pine' },
+                    TelescopeResultsNormal = { bg = 'panel' },
+                    TelescopeResultsBorder = { bg = 'panel', fg = 'pine' },
+                    -- Blend colours against the "panel" background
+                    CursorLine = { bg = 'pine', blend = 50 },
+                    StatusLine = { fg = 'pine', bg = 'pine', blend = 10 },
 
                     -- By default each group adds to the existing config.
                     -- If you only want to set what is written in this config exactly,
                     -- you can set the inherit option:
-                    Search = { bg = 'gold', inherit = false },
+                    Search = { bg = 'pine', inherit = false },
                 }
             })
 

@@ -83,11 +83,12 @@ return {
                         maxwidth = 50,
                         ellipsis_char = '...',
                         menu = ({
-                            nvim_lsp = "(LSP)",
-                            luasnip = "(LuaSnip)",
-                            buffer = "(Buffer)",
-                            nvim_lua = "(Lua)",
-                            nvim_lsp_signature_help = "(LSPSignature)",
+                            nvim_lsp = "[LSP]",
+                            luasnip = "[LuaSnip]",
+                            buffer = "[Buffer]",
+                            nvim_lua = "[Lua]",
+                            nvim_lsp_signature_help = "[LSPSignature]",
+                            ['database'] = '[Database]'
                         })
                     }),
                 },

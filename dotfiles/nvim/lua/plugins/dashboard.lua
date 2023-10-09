@@ -55,6 +55,12 @@ return {
                             keymap = 'SPC g',
                             action = "LazyGit"
                         },
+                        {
+                            icon = '󰩈 ',
+                            desc = 'Exit',
+                            key = 'q',
+                            action = "qa"
+                        },
                     },
                     footer = {} --your footer
                 }

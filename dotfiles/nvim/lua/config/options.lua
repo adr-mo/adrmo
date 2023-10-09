@@ -49,3 +49,4 @@ opt.writebackup = false
 opt.undofile = false
 opt.swapfile = false
 vim.cmd([[ set colorcolumn=120 ]])
+vim.cmd([[set nofoldenable ]])

@@ -85,18 +85,24 @@ local function _docker_enter()
     -- )
 end
 
+local function _centreon_database()
+    vim.cmd[[ DBUIToggle ]]
+end
+
 local cases = {
     ['phpstan'] = _phpstan_choose_type,
     ['php-cs-fixer'] = _php_cs_fixer_choose_type,
     ['docker-cp'] = _docker_cp_choose_source,
-    ['docker-enter'] = _docker_enter
+    ['docker-enter'] = _docker_enter,
+    ['centreon-database'] = _centreon_database
 }
 
 local choices = {
     'phpstan',
     'php-cs-fixer',
     'docker-cp',
-    'docker-enter'
+    'docker-enter',
+    'centreon-database'
 }
 
 local selectDevOptions = function()

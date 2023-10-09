@@ -56,7 +56,8 @@ return {
                         i = {
                             ['<C-k>'] = actions.move_selection_previous,
                             ['<C-j>'] = actions.move_selection_next,
-                            ['<C-d>'] = actions.delete_buffer
+                            ['<C-d>'] = actions.delete_buffer,
+                            ["<esc>"] = actions.close
                         },
                     },
                     file_ignore_patterns = { '.git/', 'node_modules/' },
@@ -76,6 +77,11 @@ return {
                         layout_config = {
                             width = 80,
                         },
+                        mappings = {
+                            i = {
+                                ["<c-d>"] = actions.delete_buffer + actions.move_to_top,
+                            }
+                        }
                     },
                     oldfiles = {
                         prompt_title = 'History',
