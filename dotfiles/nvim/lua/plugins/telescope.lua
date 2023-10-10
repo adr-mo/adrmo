@@ -73,9 +73,12 @@ return {
                         },
                     },
                     buffers = {
+                        theme = 'dropdown',
+                        prompt_title = 'Opened files',
+                        hidden = true,
                         previewer = false,
                         layout_config = {
-                            width = 80,
+                            width = 0.6,
                         },
                         mappings = {
                             i = {

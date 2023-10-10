@@ -8,11 +8,11 @@ return {
                 variant = 'main',
                 --- @usage 'main'|'moon'|'dawn'
                 dark_variant = 'main',
-                bold_vert_split = false,
-                dim_nc_background = false,
+                bold_vert_split = true,
+                dim_nc_background = true,
                 disable_background = false,
                 disable_float_background = false,
-                disable_italics = false,
+                disable_italics = true,
 
                 --- @usage string hex value or named color from rosepinetheme.com/palette
                 groups = {
@@ -46,28 +46,28 @@ return {
                 -- https://github.com/rose-pine/neovim/wiki/Recipes
                 highlight_groups = {
                     ColorColumn = { bg = 'pine' },
-                    TelescopePromptBorder = { bg = 'panel', fg = 'pine' },
-                    TelescopeBorder = { bg = 'panel', fg = 'pine' },
-                    TelescopePromptNormal = { fg = 'pine', bg = 'panel' },
-                    TelescopePromptCounter = { bg = 'panel', fg = 'pine' },
-                    TelescopePromptPrefix = { fg = 'pine', bg = 'panel' },
-                    TelescopePromptTitle = { fg = 'pine', bg = 'panel' },
-                    TelescopePreviewTitle = { fg = 'pine', bg = 'panel' },
-                    TelescopePreviewBorder = {
-                        -- bg = 'rose',
-                        fg = 'panel'
-                    },
-                    TelescopePreviewNormal = {
-                        -- bg = 'rose',
-                        fg = 'panel'
-                    },
-                    TelescopeResultsTitle = { fg = 'pine', bg = 'panel' },
-                    TelescopeMatching = { fg = 'panel' },
-                    TelescopeNormal = { bg = 'panel' },
-                    TelescopeSelection = { bg = 'pine' },
-                    TelescopeSelectionCaret = { fg = 'pine' },
-                    TelescopeResultsNormal = { bg = 'panel' },
-                    TelescopeResultsBorder = { bg = 'panel', fg = 'pine' },
+                    -- TelescopePromptBorder = { bg = 'panel', fg = 'pine' },
+                    -- TelescopeBorder = { bg = 'panel', fg = 'pine' },
+                    -- TelescopePromptNormal = { fg = 'pine', bg = 'panel' },
+                    -- TelescopePromptCounter = { bg = 'panel', fg = 'pine' },
+                    -- TelescopePromptPrefix = { fg = 'pine', bg = 'panel' },
+                    -- TelescopePromptTitle = { fg = 'pine', bg = 'panel' },
+                    -- TelescopePreviewTitle = { fg = 'pine', bg = 'panel' },
+                    -- TelescopePreviewBorder = {
+                    --     -- bg = 'rose',
+                    --     fg = 'panel'
+                    -- },
+                    -- TelescopePreviewNormal = {
+                    --     -- bg = 'rose',
+                    --     fg = 'panel'
+                    -- },
+                    -- TelescopeResultsTitle = { fg = 'pine', bg = 'panel' },
+                    -- TelescopeMatching = { fg = 'panel' },
+                    -- TelescopeNormal = { bg = 'panel' },
+                    -- TelescopeSelection = { bg = 'pine' },
+                    -- TelescopeSelectionCaret = { fg = 'pine' },
+                    -- TelescopeResultsNormal = { bg = 'panel' },
+                    -- TelescopeResultsBorder = { bg = 'panel', fg = 'pine' },
                     -- Blend colours against the "panel" background
                     CursorLine = { bg = 'pine', blend = 50 },
                     StatusLine = { fg = 'pine', bg = 'pine', blend = 10 },

@@ -98,11 +98,11 @@ local cases = {
 }
 
 local choices = {
-    'phpstan',
-    'php-cs-fixer',
     'docker-cp',
     'docker-enter',
-    'centreon-database'
+    'centreon-database',
+    'phpstan',
+    'php-cs-fixer'
 }
 
 local selectDevOptions = function()
