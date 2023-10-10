@@ -1,5 +1,5 @@
 format = """
-[](#191724)\
+[](#faf4ed)\
 $os\
 $username\
 $directory\
@@ -13,20 +13,20 @@ $git_branch \
 # and use the os module below
 [username]
 show_always = true
-style_user = "bg:#191724 fg:#eb6f92"
-style_root = "bg:#191724 fg:#eb6f92"
+style_user = "bg:#faf4ed fg:#eb6f92"
+style_root = "bg:#faf4ed fg:#eb6f92"
 format = '[$user]($style)'
 disabled = false
 
 [os]
-style = "bg:#191724 fg:#eb6f92"
+style = "bg:#faf4ed fg:#eb6f92"
 disabled = false # Disabled by default
 
 [os.symbols]
 Macos = " "
 
 [directory]
-style = "bg:#191724 fg:#3e8fb0"
+style = "bg:#faf4ed fg:#3e8fb0"
 format = "[ $path]($style)"
 truncation_length = 3
 truncation_symbol = "…/"
@@ -34,11 +34,11 @@ truncation_symbol = "…/"
 # Here is how you can shorten some long paths by text replacement
 # similar to mapped_locations in Oh My Posh:
 [directory.substitutions]
-"~/Documents" = " "
-"~/Downloads" = " "
-"~/Music" = " "
-"~/Pictures" = " "
-"~/workspace/code" = "󰈮 "
+# "~/Documents" = " "
+# "~/Downloads" = " "
+# "~/Music" = " "
+# "~/Pictures" = " "
+# "~/workspace/code" = "󰈮 "
 # Keep in mind that the order matters. For example:
 # "Important Documents" = "  "
 # will not be replaced, because "Documents" was already substituted before.
@@ -47,10 +47,10 @@ truncation_symbol = "…/"
 
 [git_branch]
 symbol = ""
-style = "bg:#191724"
+style = "bg:#faf4ed"
 format = '[ $symbol $branch ]($style)'
 
 [git_status]
-style = "bg:#191724"
+style = "bg:#faf4ed"
 format = '[$all_status$ahead_behind ]($style)'
 

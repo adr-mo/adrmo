@@ -5,7 +5,7 @@ return {
         config = function()
             require('rose-pine').setup({
                 --- @usage 'auto'|'main'|'moon'|'dawn'
-                variant = 'main',
+                variant = 'dawn',
                 --- @usage 'main'|'moon'|'dawn'
                 dark_variant = 'main',
                 bold_vert_split = true,
@@ -69,8 +69,8 @@ return {
                     -- TelescopeResultsNormal = { bg = 'panel' },
                     -- TelescopeResultsBorder = { bg = 'panel', fg = 'pine' },
                     -- Blend colours against the "panel" background
-                    CursorLine = { bg = 'pine', blend = 50 },
-                    StatusLine = { fg = 'pine', bg = 'pine', blend = 10 },
+                    CursorLine = { bg = 'rose', blend = 50 },
+                    StatusLine = { fg = 'rose', bg = 'rose', blend = 10 },
 
                     -- By default each group adds to the existing config.
                     -- If you only want to set what is written in this config exactly,
