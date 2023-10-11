@@ -45,7 +45,7 @@ return {
                 -- Change specific vim highlight groups
                 -- https://github.com/rose-pine/neovim/wiki/Recipes
                 highlight_groups = {
-                    ColorColumn = { bg = 'pine' },
+                    ColorColumn = { bg = 'rose' },
                     -- TelescopePromptBorder = { bg = 'panel', fg = 'pine' },
                     -- TelescopeBorder = { bg = 'panel', fg = 'pine' },
                     -- TelescopePromptNormal = { fg = 'pine', bg = 'panel' },
@@ -69,7 +69,7 @@ return {
                     -- TelescopeResultsNormal = { bg = 'panel' },
                     -- TelescopeResultsBorder = { bg = 'panel', fg = 'pine' },
                     -- Blend colours against the "panel" background
-                    CursorLine = { bg = 'rose', blend = 50 },
+                    CursorLine = { bg = 'rose', blend = 30 },
                     StatusLine = { fg = 'rose', bg = 'rose', blend = 10 },
 
                     -- By default each group adds to the existing config.

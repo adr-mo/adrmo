@@ -1,5 +1,3 @@
 return {
-    {
-        'AndrewRadev/splitjoin.vim',
-    },
+    'AndrewRadev/splitjoin.vim',
 }

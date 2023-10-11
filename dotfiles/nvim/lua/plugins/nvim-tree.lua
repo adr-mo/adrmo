@@ -14,7 +14,7 @@ return {
                 },
             },
             view = {
-                width = 50
+                width = 30
             },
             update_focused_file = {
                 enable = true,

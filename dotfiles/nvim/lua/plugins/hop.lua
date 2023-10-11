@@ -1,4 +1,5 @@
 return {
+    -- no longer maintained maybe look at https://github.com/folke/flash.nvim
     'phaazon/hop.nvim',
     branch = 'v2', -- optional but strongly recommended
     config = function ()
