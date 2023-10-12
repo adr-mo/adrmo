@@ -1,6 +1,4 @@
 return {
-    {
-        'akinsho/toggleterm.nvim',
-        version = "*",
-    }
+    -- amongst your other plugins
+    { 'akinsho/toggleterm.nvim', version = "*", config = true }
 }

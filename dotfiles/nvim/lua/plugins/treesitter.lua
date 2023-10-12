@@ -36,8 +36,6 @@ return {
                     },
                 },
                 -- ensure these language parsers are installed
-                ensure_installed = 'all', 
-                -- auto install above language parsers
                 auto_install = true,
             })
         end,

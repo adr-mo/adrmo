@@ -2,8 +2,9 @@ return {
     {
         "nvim-lualine/lualine.nvim",
         opts = {
-            theme = "nord",
-            disabled_filetypes = { 'NVimTree' }
+            theme = 'auto',
+            disabled_filetypes = { 'NVimTree' },
+
         },
     }
 }

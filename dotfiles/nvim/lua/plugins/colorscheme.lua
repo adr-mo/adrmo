@@ -1,86 +1,37 @@
 return {
-    {
-        'rose-pine/neovim',
-        name = 'rose-pine',
-        config = function()
-            require('rose-pine').setup({
-                --- @usage 'auto'|'main'|'moon'|'dawn'
-                variant = 'dawn',
-                --- @usage 'main'|'moon'|'dawn'
-                dark_variant = 'main',
-                bold_vert_split = true,
-                dim_nc_background = true,
-                disable_background = false,
-                disable_float_background = false,
-                disable_italics = true,
+    "folke/tokyonight.nvim",
+    lazy = false,
+    priority = 1000,
+    opts = {
+        -- your configuration comes here
+        -- or leave it empty to use the default settings
+        style = "night",        -- The theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`
+        light_style = "day",    -- The theme is used when the background is set to light
+        transparent = false,    -- Enable this to disable setting the background color
+        terminal_colors = true, -- Configure the colors used when opening a `:terminal` in [Neovim](https://github.com/neovim/neovim)
+        styles = {
+            comments = { italic = true },
+            keywords = { italic = true },
+            functions = {},
+            variables = {},
+            -- Background styles. Can be "dark", "transparent" or "normal"
+            sidebars = "dark",            -- style for sidebars, see below
+            floats = "dark",              -- style for floating windows
+        },
+        sidebars = { "qf", "help", "terminal" },      -- Set a darker background on sidebar-like windows. For example: `["qf", "vista_kind", "terminal", "packer"]`
+        day_brightness = 0.3,             -- Adjusts the brightness of the colors of the **Day** style. Number between 0 and 1, from dull to vibrant colors
+        hide_inactive_statusline = false, -- Enabling this option, will hide inactive statuslines and replace them with a thin border instead. Should work with the standard **StatusLine** and **LuaLine**.
+        dim_inactive = true,             -- dims inactive windows
+        lualine_bold = true,             -- When `true`, section headers in the lualine theme will be bold
+        on_highlights = function(hl, c)
+            hl.CursorLine = { bg = c.blue0, blend = 10 }
+            hl.StatusLine = { fg = c.blue0, bg = c.blue0, blend = 10 }
+            hl.ColorColumn = { bg = c.blue }
 
-                --- @usage string hex value or named color from rosepinetheme.com/palette
-                groups = {
-                    background = 'base',
-                    background_nc = '_experimental_nc',
-                    panel = 'surface',
-                    panel_nc = 'base',
-                    border = 'highlight_med',
-                    comment = 'muted',
-                    link = 'iris',
-                    punctuation = 'subtle',
-
-                    error = 'love',
-                    hint = 'iris',
-                    info = 'foam',
-                    warn = 'gold',
-
-                    headings = {
-                        h1 = 'iris',
-                        h2 = 'foam',
-                        h3 = 'rose',
-                        h4 = 'gold',
-                        h5 = 'pine',
-                        h6 = 'foam',
-                    }
-                    -- or set all headings at once
-                    -- headings = 'subtle'
-                },
-
-                -- Change specific vim highlight groups
-                -- https://github.com/rose-pine/neovim/wiki/Recipes
-                highlight_groups = {
-                    ColorColumn = { bg = 'rose' },
-                    -- TelescopePromptBorder = { bg = 'panel', fg = 'pine' },
-                    -- TelescopeBorder = { bg = 'panel', fg = 'pine' },
-                    -- TelescopePromptNormal = { fg = 'pine', bg = 'panel' },
-                    -- TelescopePromptCounter = { bg = 'panel', fg = 'pine' },
-                    -- TelescopePromptPrefix = { fg = 'pine', bg = 'panel' },
-                    -- TelescopePromptTitle = { fg = 'pine', bg = 'panel' },
-                    -- TelescopePreviewTitle = { fg = 'pine', bg = 'panel' },
-                    -- TelescopePreviewBorder = {
-                    --     -- bg = 'rose',
-                    --     fg = 'panel'
-                    -- },
-                    -- TelescopePreviewNormal = {
-                    --     -- bg = 'rose',
-                    --     fg = 'panel'
-                    -- },
-                    -- TelescopeResultsTitle = { fg = 'pine', bg = 'panel' },
-                    -- TelescopeMatching = { fg = 'panel' },
-                    -- TelescopeNormal = { bg = 'panel' },
-                    -- TelescopeSelection = { bg = 'pine' },
-                    -- TelescopeSelectionCaret = { fg = 'pine' },
-                    -- TelescopeResultsNormal = { bg = 'panel' },
-                    -- TelescopeResultsBorder = { bg = 'panel', fg = 'pine' },
-                    -- Blend colours against the "panel" background
-                    CursorLine = { bg = 'rose', blend = 30 },
-                    StatusLine = { fg = 'rose', bg = 'rose', blend = 10 },
-
-                    -- By default each group adds to the existing config.
-                    -- If you only want to set what is written in this config exactly,
-                    -- you can set the inherit option:
-                    Search = { bg = 'pine', inherit = false },
-                }
-            })
-
-            -- Set colorscheme after options
-            vim.cmd('colorscheme rose-pine')
         end
-    }
+
+    },
+    init = function()
+        vim.cmd [[ colorscheme tokyonight-night ]]
+    end
 }

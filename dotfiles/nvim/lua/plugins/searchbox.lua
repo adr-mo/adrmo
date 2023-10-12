@@ -46,6 +46,5 @@ return {
             }
         })
         vim.keymap.set('n', '<leader>sr', ':SearchBoxReplace<CR>')
-        vim.keymap.set('n', '/', ':SearchBoxSimple<CR>')
     end
 }

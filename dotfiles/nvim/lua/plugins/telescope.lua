@@ -13,7 +13,7 @@ return {
             'tpope/vim-rhubarb',
             "aaronhallaert/advanced-git-search.nvim",
             "lpoto/telescope-docker.nvim",
-            'nvim-telescope/telescope-dap.nvim'
+            'nvim-telescope/telescope-dap.nvim',
         },
         init = function()
             vim.keymap.set('n', '<leader>fb', "<cmd>Telescope buffers <CR>")
@@ -31,7 +31,8 @@ return {
             vim.keymap.set("n", "<leader>fG", "<cmd>Telescope gh pull_request <cr>")
             vim.keymap.set('n', '<leader>fi', '<cmd>AdvancedGitSearch<CR>', { desc = "AdvancedGitSearch" })
             vim.keymap.set('n', '<leader>dk', '<cmd>Telescope docker<CR>', { desc = 'Docker' })
-            vim.keymap.set("n", "<leader>dap", '<cmd>lua require("telescope").extensions.dap.commands{}<CR>', { desc = 'Dap'})
+            vim.keymap.set("n", "<leader>dap", '<cmd>lua require("telescope").extensions.dap.commands{}<CR>',
+                { desc = 'Dap' })
         end,
         config = function()
             local telescope = require('telescope')
@@ -50,7 +51,7 @@ return {
                     prompt_prefix = '   ',
                     path_display = { truncate = 1 },
                     selection_caret = '  ',
-                    border = false,
+                    border = true,
                     layout_config = {
                         prompt_position = 'top',
                     },

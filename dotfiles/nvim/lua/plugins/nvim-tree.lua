@@ -3,6 +3,8 @@ vim.g.loaded_netrwPlugin = 1
 
 vim.opt.termguicolors = true
 
+local WIDTH_RATIO = 0.2  -- You can change this too
+
 return {
     {
         'nvim-tree/nvim-tree.lua',
@@ -14,7 +16,9 @@ return {
                 },
             },
             view = {
-                width = 30
+                width = function()
+                    return math.floor(vim.opt.columns:get() * WIDTH_RATIO)
+                end,
             },
             update_focused_file = {
                 enable = true,
