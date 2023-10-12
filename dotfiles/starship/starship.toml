@@ -1,5 +1,5 @@
 format = """
-[](#faf4ed)\
+[](#1a1b26)\
 $os\
 $username\
 $directory\
@@ -13,20 +13,20 @@ $git_branch \
 # and use the os module below
 [username]
 show_always = true
-style_user = "bg:#faf4ed fg:#eb6f92"
-style_root = "bg:#faf4ed fg:#eb6f92"
+style_user = "bg:#1a1b26 fg:#89ddff"
+style_root = "bg:#1a1b26 fg:#89ddff"
 format = '[$user]($style)'
 disabled = false
 
 [os]
-style = "bg:#faf4ed fg:#eb6f92"
+style = "bg:#1a1b26 fg:#89ddff"
 disabled = false # Disabled by default
 
 [os.symbols]
 Macos = " "
 
 [directory]
-style = "bg:#faf4ed fg:#3e8fb0"
+style = "bg:#1a1b26 fg:#0db9d7"
 format = "[ $path]($style)"
 truncation_length = 3
 truncation_symbol = "…/"
@@ -47,10 +47,10 @@ truncation_symbol = "…/"
 
 [git_branch]
 symbol = ""
-style = "bg:#faf4ed"
+style = "bg:#1a1b26 fg:#9ece6a"
 format = '[ $symbol $branch ]($style)'
 
 [git_status]
-style = "bg:#faf4ed"
+style = "bg:#1a1b26 fg:#9ece6a"
 format = '[$all_status$ahead_behind ]($style)'
 
