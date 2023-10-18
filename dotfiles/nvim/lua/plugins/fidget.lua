@@ -1,11 +1,14 @@
-return {
-    {
-        "j-hui/fidget.nvim",
-        tag = 'legacy',
-        opts = {
-            window = {
-                blend = 0,
-            },
-        }
-    },
+local P = {
+    "j-hui/fidget.nvim",
+    tag = 'legacy',
 }
+
+function P.config()
+    require('fidget').setup({
+        window = {
+            blend = 0,
+        },
+    })
+end
+
+return P

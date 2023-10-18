@@ -1,10 +1,14 @@
-return {
+local P = {
     "vinnymeller/swagger-preview.nvim",
     build = "npm install -g swagger-ui-watcher",
-    opts = {
-        -- The port to run the preview server on
-        port = 8000,
-        -- The host to run the preview server on
-        host = "localhost"
-    }
 }
+
+function P.config()
+    local swagger = require('swagger-preview')
+    swagger.setup({
+        port = 8000,
+        host = "localhost"
+    })
+end
+
+return P

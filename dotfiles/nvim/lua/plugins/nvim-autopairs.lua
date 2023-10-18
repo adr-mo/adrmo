@@ -1,5 +1,11 @@
-return {
+local P = {
     'windwp/nvim-autopairs',
     event = "InsertEnter",
-    opts = {} -- this is equalent to setup({}) function
 }
+
+function P.config()
+    local p = require('nvim-autopairs')
+    p.setup({})
+end
+
+return P

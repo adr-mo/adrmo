@@ -1,5 +1,5 @@
-return {
-    {
-        "tpope/vim-surround"
-    }
+local P = {
+    "tpope/vim-surround"
 }
+
+return P

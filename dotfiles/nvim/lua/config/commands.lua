@@ -1,15 +1,5 @@
 local notifyOptions = { render = 'wrapped-compact', stages = 'slide' }
 
--- Create command to copy relative file path to the clipboard + notify
-local copyPath = function()
-    local path = vim.fn.expand("%")
-    vim.fn.setreg("+", path)
-    vim.notify('Copied "' .. path .. '" to the clipboard!', 'info', notifyOptions)
-end
-
-vim.api.nvim_create_user_command("CpPath", copyPath, {})
-vim.keymap.set('n', '<leader>cp', '<cmd>CpPath<CR>')
-
 local function __make_choice(choices, actions)
     vim.ui.select(
         choices,
@@ -79,9 +69,6 @@ local function _docker_enter()
         close_on_exit = false
     })
     enter_container:toggle()
-    -- require('toggleterm').exec(
-    --    "docker exec -ti $(docker ps -qa) bash"
-    -- )
 end
 
 local function _centreon_database()
@@ -93,13 +80,13 @@ local cases = {
     ['php-cs-fixer'] = _php_cs_fixer_choose_type,
     ['docker-cp'] = _docker_cp_choose_source,
     ['docker-enter'] = _docker_enter,
-    ['centreon-database'] = _centreon_database
+    ['database'] = _centreon_database
 }
 
 local choices = {
     'docker-cp',
     'docker-enter',
-    'centreon-database',
+    'database',
     'phpstan',
     'php-cs-fixer'
 }
