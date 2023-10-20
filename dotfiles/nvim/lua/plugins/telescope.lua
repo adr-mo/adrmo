@@ -13,6 +13,7 @@ local P = {
         "aaronhallaert/advanced-git-search.nvim",
         "lpoto/telescope-docker.nvim",
         'nvim-telescope/telescope-dap.nvim',
+        'LukasPietzschmann/telescope-tabs',
     }
 }
 

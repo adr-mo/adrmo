@@ -1,15 +1,9 @@
 local options = { noremap = true, silent = true }
 
-vim.keymap.set(
-    'n',
-    '<leader>df',
-    "<cmd>:TermExec direction=float cmd='./vendor/bin/php-cs-fixer --config=.php-cs-fixer.dist.php --diff --dry-run fix %'<cr>"
-)
-
-local on_attach = function(client, bufnr)
-    vim.keymap.set("n", "<Leader>d", vim.diagnostic.open_float, options)
-    vim.keymap.set("n", "<Leader>a", vim.lsp.buf.code_action, options)
-    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
+local on_attach = function()
+    vim.keymap.set('n', '<Leader>d', vim.diagnostic.open_float, options)
+    vim.keymap.set('n', '<Leader>a', vim.lsp.buf.code_action, options)
+    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, options)
     vim.keymap.set('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>')
     vim.keymap.set('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>')
     vim.keymap.set('n', 'gd', '<cmd>:Telescope lsp_definitions<CR>')
@@ -20,41 +14,48 @@ local on_attach = function(client, bufnr)
     vim.keymap.set('n', '<C-K>', vim.lsp.buf.signature_help, 'Signature Documentation')
 end
 
-vim.keymap.set(
-    'n',
-    '<leader>dfc',
-    "<cmd>:! echo \"Fixing coding style issues\" ; ./vendor/bin/php-cs-fixer --config=.php-cs-fixer.dist.php --quiet fix %<cr>"
-)
-
 local languages = {
-    "lua_ls",
-    "tsserver",
-    "cssls",
-    "jsonls",
-    "bashls",
-    "marksman",
-    "intelephense",
-    "yamlls",
-    "sqlls"
+    'lua_ls',
+    'tsserver',
+    'cssls',
+    'jsonls',
+    'bashls',
+    'marksman',
+    'intelephense',
+    'yamlls',
+    'sqlls'
 }
 
 return {
     {
-        "neovim/nvim-lspconfig",
+        'neovim/nvim-lspconfig',
         dependencies = {
-            "hrsh7th/cmp-nvim-lsp",
+            'hrsh7th/cmp-nvim-lsp',
             'b0o/schemastore.nvim',
         },
         config = function()
+            vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
+                vim.lsp.handlers.hover, {
+                    border = 'rounded'
+                }
+            )
+            vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(
+                vim.lsp.handlers.signature_help, {
+                    border = 'rounded'
+                }
+            )
+            vim.diagnostic.config {
+                float = { border = 'rounded' }
+            }
             local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-            require("lspconfig").lua_ls.setup({
+            require('lspconfig').lua_ls.setup({
                 on_attach = on_attach,
                 capabilities = capabilities,
                 settings = {
                     Lua = {
                         diagnostics = {
-                            globals = { "vim", "describe", "it" },
+                            globals = { 'vim', 'describe', 'it' },
                         },
                     },
                 },
@@ -96,13 +97,13 @@ return {
             })
 
             for _, language in pairs(languages) do
-                require("lspconfig")[language].setup({
+                require('lspconfig')[language].setup({
                     on_attach = on_attach,
                     capabilities = capabilities,
                 })
             end
 
-            vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+            vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
                 vim.lsp.diagnostic.on_publish_diagnostics, {
                     virtual_text = true
                 }
@@ -110,20 +111,26 @@ return {
         end
     },
     {
-        "williamboman/mason.nvim",
+        'williamboman/mason.nvim',
         config = function()
             require('mason').setup({
                 ui = {
-                    border = "rounded",
+                    border = 'rounded',
                     icons = {
-                        package_installed = "✓",
-                        package_pending = "➜",
-                        package_uninstalled = "✗",
+                        package_installed = '✓',
+                        package_pending = '➜',
+                        package_uninstalled = '✗',
                     },
                 },
             })
         end
     },
-    { "williamboman/mason-lspconfig.nvim" },
+    {
+        'williamboman/mason-lspconfig.nvim',
+        config = function ()
+            require('mason-lspconfig').setup({
+                ensure_installed = languages
+            })
+        end
+    },
 }
-

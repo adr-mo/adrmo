@@ -10,6 +10,7 @@ function P.config()
     vim.g.loaded_netrw = 1
     vim.g.loaded_netrwPlugin = 1
     vim.opt.termguicolors = true
+    local icons = require('config.icons')
 
     vim.keymap.set('n', '<leader>e', ':NvimTreeFindFileToggle<CR>', { noremap = true, silent = true })
     tree.setup({
@@ -25,6 +26,24 @@ function P.config()
         },
         update_focused_file = {
             enable = true,
+        },
+        renderer = {
+            icons = {
+                glyphs = {
+                    git = {
+                        unstaged = icons.git.FileUnstaged,
+                        untracked = icons.git.FileUntracked,
+                    },
+                },
+            },
+        },
+        diagnostics = {
+            icons = {
+                hint = icons.diagnostics.Hint,
+                info = icons.diagnostics.Info,
+                warning = icons.diagnostics.Warning,
+                error = icons.diagnostics.Error,
+            },
         },
     })
 end

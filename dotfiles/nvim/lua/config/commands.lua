@@ -72,7 +72,7 @@ local function _docker_enter()
 end
 
 local function _centreon_database()
-    vim.cmd[[ DBUIToggle ]]
+    vim.cmd[[ :tabnew | DBUIToggle ]]
 end
 
 local cases = {

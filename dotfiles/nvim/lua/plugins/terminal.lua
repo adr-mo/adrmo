@@ -5,6 +5,7 @@ local P = {
 
 function P.config()
     local t = require('toggleterm')
+    local map = vim.keymap.set
     t.setup {
         start_in_insert = true,
         direction = 'float',
@@ -19,6 +20,7 @@ function P.config()
             vim.api.nvim_set_option_value("foldexpr", "0", { scope = "local" })
         end,
     }
+    map('n', '<leader>tt', "<cmd>ToggleTerm direction=float<CR>", { desc = 'Open terminal'}) -- Floating terminal
 end
 
 return P

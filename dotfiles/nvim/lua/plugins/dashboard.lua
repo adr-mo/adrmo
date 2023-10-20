@@ -54,9 +54,21 @@ function P.config()
                 {
                     icon = ' ',
                     desc = 'Lazygit',
-                    key = 'l',
+                    key = 'g',
                     keymap = 'SPC g',
                     action = "LazyGit"
+                },
+                {
+                    icon = ' ',
+                    desc = 'Lazy',
+                    key = 'l',
+                    action = "Lazy"
+                },
+                {
+                    icon = ' ',
+                    desc = 'Projects',
+                    key = 'p',
+                    action = "Telescope projects"
                 },
                 {
                     icon = '󰩈 ',

@@ -8,7 +8,7 @@ function P.config()
     require('tokyonight').setup({
         -- your configuration comes here
         -- or leave it empty to use the default settings
-        style = "night",        -- The theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`
+        style = "storm",        -- The theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`
         light_style = "day",    -- The theme is used when the background is set to light
         transparent = false,    -- Enable this to disable setting the background color
         terminal_colors = true, -- Configure the colors used when opening a `:terminal` in [Neovim](https://github.com/neovim/neovim)
@@ -27,12 +27,12 @@ function P.config()
         dim_inactive = true,                     -- dims inactive windows
         lualine_bold = true,                     -- When `true`, section headers in the lualine theme will be bold
         on_highlights = function(hl, c)
-            hl.CursorLine = { bg = c.blue0, blend = 10 }
+            hl.CursorLine = { bg = c.bg_dark, blend = 10 }
             hl.StatusLine = { fg = c.blue0, bg = c.blue0, blend = 10 }
             hl.ColorColumn = { bg = c.blue }
         end
     })
-    vim.cmd [[ colorscheme tokyonight-night ]]
+    vim.cmd [[ colorscheme tokyonight-storm ]]
 end
 
 return P
