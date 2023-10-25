@@ -1,38 +1,60 @@
 local P = {
-    "folke/tokyonight.nvim",
-    lazy = false,
-    priority = 1000,
+    "neanias/everforest-nvim",
 }
 
 function P.config()
-    require('tokyonight').setup({
-        -- your configuration comes here
-        -- or leave it empty to use the default settings
-        style = "storm",        -- The theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`
-        light_style = "day",    -- The theme is used when the background is set to light
-        transparent = false,    -- Enable this to disable setting the background color
-        terminal_colors = true, -- Configure the colors used when opening a `:terminal` in [Neovim](https://github.com/neovim/neovim)
-        styles = {
-            comments = { italic = true },
-            keywords = { italic = true },
-            functions = {},
-            variables = {},
-            -- Background styles. Can be "dark", "transparent" or "normal"
-            sidebars = "dark",                   -- style for sidebars, see below
-            floats = "dark",                     -- style for floating windows
-        },
-        sidebars = { "qf", "help", "terminal" }, -- Set a darker background on sidebar-like windows. For example: `["qf", "vista_kind", "terminal", "packer"]`
-        day_brightness = 0.3,                    -- Adjusts the brightness of the colors of the **Day** style. Number between 0 and 1, from dull to vibrant colors
-        hide_inactive_statusline = false,        -- Enabling this option, will hide inactive statuslines and replace them with a thin border instead. Should work with the standard **StatusLine** and **LuaLine**.
-        dim_inactive = true,                     -- dims inactive windows
-        lualine_bold = true,                     -- When `true`, section headers in the lualine theme will be bold
-        on_highlights = function(hl, c)
-            hl.CursorLine = { bg = c.bg_dark, blend = 10 }
-            hl.StatusLine = { fg = c.blue0, bg = c.blue0, blend = 10 }
-            hl.ColorColumn = { bg = c.blue }
-        end
+    require("everforest").setup({
+        ---Controls the "hardness" of the background. Options are "soft", "medium" or "hard".
+        ---Default is "medium".
+        background = "hard",
+        ---How much of the background should be transparent. 2 will have more UI
+        ---components be transparent (e.g. status line background)
+        transparent_background_level = 0,
+        ---Whether italics should be used for keywords and more.
+        italics = false,
+        ---Disable italic fonts for comments. Comments are in italics by default, set
+        ---this to `true` to make them _not_ italic!
+        disable_italic_comments = false,
+        ---By default, the colour of the sign column background is the same as the as normal text
+        ---background, but you can use a grey background by setting this to `"grey"`.
+        sign_column_background = "none",
+        ---The contrast of line numbers, indent lines, etc. Options are `"high"` or
+        ---`"low"` (default).
+        ui_contrast = "high",
+        ---Dim inactive windows. Only works in Neovim. Can look a bit weird with Telescope.
+        ---
+        ---When this option is used in conjunction with show_eob set to `false`, the
+        ---end of the buffer will only be hidden inside the active window. Inside
+        ---inactive windows, the end of buffer filler characters will be visible in
+        ---dimmed symbols. This is due to the way Vim and Neovim handle `EndOfBuffer`.
+        dim_inactive_windows = false,
+        ---Some plugins support highlighting error/warning/info/hint texts, by
+        ---default these texts are only underlined, but you can use this option to
+        ---also highlight the background of them.
+        diagnostic_text_highlight = false,
+        ---Which colour the diagnostic text should be. Options are `"grey"` or `"coloured"` (default)
+        diagnostic_virtual_text = "coloured",
+        ---Some plugins support highlighting error/warning/info/hint lines, but this
+        ---feature is disabled by default in this colour scheme.
+        diagnostic_line_highlight = false,
+        ---By default, this color scheme won't colour the foreground of |spell|, instead
+        ---colored under curls will be used. If you also want to colour the foreground,
+        ---set this option to `true`.
+        spell_foreground = false,
+        ---Whether to show the EndOfBuffer highlight.
+        show_eob = true,
+        ---You can override specific highlights to use other groups or a hex colour.
+        ---This function will be called with the highlights and colour palette tables.
+        ---@param highlight_groups Highlights
+        ---@param palette Palette
+        on_highlights = function(highlight_groups, palette) end,
+        ---You can override colours in the palette to use different hex colours.
+        ---This function will be called once the base and background colours have
+        ---been mixed on the palette.
+        ---@param palette Palette
+        colours_override = function(palette) end, -- Your config here
     })
-    vim.cmd [[ colorscheme tokyonight-storm ]]
+    vim.cmd([[colorscheme everforest]])
 end
 
 return P
