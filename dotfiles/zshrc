@@ -14,16 +14,16 @@ plugins=(
 )
 
 alias c="clear"
-alias ls="colorls --sd --dark"
-alias ll="colorls --sd --dark -l"
 alias cat="bat"
 alias vim="/Users/Adrien/workspace/nvim-macos/bin/nvim"
 alias nvim="/Users/Adrien/workspace/nvim-macos/bin/nvim"
+alias v="/Users/Adrien/workspace/nvim-macos/bin/nvim"
 alias create-pr="gh pr create --web"
 alias t="tmux"
 alias lg="lazygit"
 alias exec-phpstan="./vendor/bin/phpstan analyze --configuration=phpstan.core.neon --level=max" 
 alias centreon-dev="docker exec -ti centreon-dev bash"
+alias ll='ls -lah'
 
 ### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
 export PATH="/Users/Adrien/.rd/bin:$PATH"
