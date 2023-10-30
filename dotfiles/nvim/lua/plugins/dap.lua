@@ -96,7 +96,7 @@ function P.config()
     dap.adapters.php = {
         type = "executable",
         command = "node",
-        args = { "/Users/Adrien/.vscode/extensions/xdebug.php-debug-1.33.0/out/phpDebug.js" },
+        args = { "/Users/Adrien/.vscode/extensions/xdebug.php-debug-1.33.1/out/phpDebug.js" },
     }
 
     dap.configurations.php = {

@@ -1,43 +1,61 @@
 local P = {
     "nvim-treesitter/nvim-treesitter",
+    event = { "BufReadPre", "BufNewFile" },
     build = ":TSUpdate",
+    dependencies = {
+        "nvim-treesitter/nvim-treesitter-textobjects",
+        "windwp/nvim-ts-autotag",
+    }
 }
 
 function P.config()
-    local t = require('nvim-treesitter.configs')
-    t.setup({
+    local treesitter = require("nvim-treesitter.configs")
+
+    -- configure treesitter
+    treesitter.setup({   -- enable syntax highlighting
         highlight = {
-            enable = true,
-            additional_vim_regex_highlighting = true,
-        },
-        context_commentstring = {
             enable = true,
         },
         -- enable indentation
         indent = { enable = true },
         -- enable autotagging (w/ nvim-ts-autotag plugin)
-        autotag = { enable = true },
-        textobjects = {
-            select = {
-                enable = true,
-                lookahead = true,
-                keymaps = {
-                    ['if'] = '@function.inner',
-                    ['af'] = '@function.outer',
-                    ['ia'] = '@parameter.inner',
-                    ['aa'] = '@parameter.outer',
-                },
-            }
+        autotag = {
+            enable = true,
+        },
+        -- ensure these language parsers are installed
+        ensure_installed = {
+            "json",
+            "javascript",
+            "typescript",
+            "tsx",
+            "yaml",
+            "html",
+            "css",
+            "markdown",
+            "markdown_inline",
+            "bash",
+            "lua",
+            "vim",
+            "dockerfile",
+            "gitignore",
+            "query",
+            "php",
+            "phpdoc"
         },
         incremental_selection = {
             enable = true,
             keymaps = {
-                init_selection = "<leader>",
-                node_incremental = "<leader>",
+                init_selection = "<C-space>",
+                node_incremental = "<C-space>",
+                scope_incremental = false,
+                node_decremental = "<bs>",
             },
         },
-        -- ensure these language parsers are installed
-        auto_install = true,
+        -- enable nvim-ts-context-commentstring plugin for commenting tsx and jsx
+        context_commentstring = {
+            enable = true,
+            enable_autocmd = false,
+        },
     })
 end
 

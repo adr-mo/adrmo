@@ -55,6 +55,8 @@ function P.config()
             -- Scroll text in documentation window
             ['<C-u>'] = cmp.mapping.scroll_docs(-4),
             ['<C-d>'] = cmp.mapping.scroll_docs(4),
+            ["<C-k>"] = cmp.mapping.select_prev_item(), -- previous suggestion
+            ["<C-j>"] = cmp.mapping.select_next_item(), -- next suggestion
             -- toggle completion
             ['<C-Space>'] = cmp.mapping(function() if cmp.visible() then cmp.abort() else cmp.complete() end end),
             -- navigate completion entries with TAB
