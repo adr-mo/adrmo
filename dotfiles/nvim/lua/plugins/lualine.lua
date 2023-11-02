@@ -5,9 +5,9 @@ local P = {
 function P.config()
     local lualine = require('lualine')
     lualine.setup({
-        theme = 'auto',
-        disabled_filetypes = { 'NVimTree', 'dapui_breakpoints' },
         options = {
+            theme = 'auto',
+            disabled_filetypes = { 'NVimTree', 'dapui_breakpoints' },
             -- if we want to disable for any other filetype just :echo &ft to get the name
             ignore_focus = {
                 "dapui_watches", "dapui_breakpoints",

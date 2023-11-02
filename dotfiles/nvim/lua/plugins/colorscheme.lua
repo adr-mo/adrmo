@@ -1,60 +1,153 @@
-local P = {
-    "neanias/everforest-nvim",
+local Plugin = {
+    'catppuccin/nvim',
+    name = "catppuccin",
+    lazy = false,
+    priority = 1000,
 }
 
-function P.config()
-    require("everforest").setup({
-        ---Controls the "hardness" of the background. Options are "soft", "medium" or "hard".
-        ---Default is "medium".
-        background = "hard",
-        ---How much of the background should be transparent. 2 will have more UI
-        ---components be transparent (e.g. status line background)
-        transparent_background_level = 0,
-        ---Whether italics should be used for keywords and more.
-        italics = false,
-        ---Disable italic fonts for comments. Comments are in italics by default, set
-        ---this to `true` to make them _not_ italic!
-        disable_italic_comments = false,
-        ---By default, the colour of the sign column background is the same as the as normal text
-        ---background, but you can use a grey background by setting this to `"grey"`.
-        sign_column_background = "none",
-        ---The contrast of line numbers, indent lines, etc. Options are `"high"` or
-        ---`"low"` (default).
-        ui_contrast = "high",
-        ---Dim inactive windows. Only works in Neovim. Can look a bit weird with Telescope.
-        ---
-        ---When this option is used in conjunction with show_eob set to `false`, the
-        ---end of the buffer will only be hidden inside the active window. Inside
-        ---inactive windows, the end of buffer filler characters will be visible in
-        ---dimmed symbols. This is due to the way Vim and Neovim handle `EndOfBuffer`.
-        dim_inactive_windows = false,
-        ---Some plugins support highlighting error/warning/info/hint texts, by
-        ---default these texts are only underlined, but you can use this option to
-        ---also highlight the background of them.
-        diagnostic_text_highlight = false,
-        ---Which colour the diagnostic text should be. Options are `"grey"` or `"coloured"` (default)
-        diagnostic_virtual_text = "coloured",
-        ---Some plugins support highlighting error/warning/info/hint lines, but this
-        ---feature is disabled by default in this colour scheme.
-        diagnostic_line_highlight = false,
-        ---By default, this color scheme won't colour the foreground of |spell|, instead
-        ---colored under curls will be used. If you also want to colour the foreground,
-        ---set this option to `true`.
-        spell_foreground = false,
-        ---Whether to show the EndOfBuffer highlight.
-        show_eob = true,
-        ---You can override specific highlights to use other groups or a hex colour.
-        ---This function will be called with the highlights and colour palette tables.
-        ---@param highlight_groups Highlights
-        ---@param palette Palette
-        on_highlights = function(highlight_groups, palette) end,
-        ---You can override colours in the palette to use different hex colours.
-        ---This function will be called once the base and background colours have
-        ---been mixed on the palette.
-        ---@param palette Palette
-        colours_override = function(palette) end, -- Your config here
-    })
-    vim.cmd([[colorscheme everforest]])
+function Plugin.config()
+    local catppuccin = require('catppuccin')
+    local transparent_background = true
+    local clear = {}
+
+    catppuccin.setup {
+        flavor = 'macchiato',
+        transparent_background = transparent_background,
+        term_colors = true,
+        diam_inactive = {
+            enabled = false,   -- dims the background color of inactive window
+            shade = 'dark',
+            percentage = 0.15, -- percentage of the shade to apply to the inactive window
+        },
+        styles = {             -- Handles the styles of general hi groups (see `:h highlight-args`):
+            comments = { 'italic' }, -- Change the style of comments
+            conditionals = { 'italic' },
+            loops = {},
+            functions = {},
+            keywords = {},
+            startings = {},
+            variables = {},
+            numbers = {},
+            booleans = {},
+            properties = {},
+            types = {},
+            operators = {},
+        },
+        color_overrides = {},
+        highlight_overrides = {
+            all = function(color)
+                return {
+                    -- For base configs
+                    NormalFloat = { fg = color.text, bg = transparent_background and color.none or color.mantle },
+                    FloatBorder = {
+                        fg = transparent_background and color.blue or color.mantle,
+                        bg = transparent_background and color.none or color.mantle,
+                    },
+                    CursorLineNr = { fg = color.green },
+
+                    -- For native lsp configs
+                    diagnosticVirtualTextError = { bg = color.none },
+                    DiagnosticVirtualTextWarn = { bg = color.basenone },
+                    DiagnosticVirtualTextInfo = { bg = color.none },
+                    DiagnosticVirtualTextHint = { bg = color.none },
+                    LspInfoBorder = { link = "FloatBorder" },
+
+                    -- For mason.nvim
+                    MasonNormal = { link = "NormalFloat" },
+
+                        -- For indent-blankline
+                    IblIndent = { fg = color.surface0 },
+                    IblScope = { fg = color.surface2, style = { "bold" } },
+
+                    -- For completion menu 
+                    Pmenu = { fg = color.overlay2, bg = transparent_background and color.none or color.base },
+                    PmenuBorder = { fg = color.surface1, bg = transparent_background and color.none or color.base },
+                    PmenuSel = { bg = color.green, fg = color.base },
+                    CmpItemAbbr = { fg = color.overlay2 },
+                    CmpItemAbbrMatch = { fg = color.blue, style = { "bold" } },
+                    CmpDoc = { link = "NormalFloat" },
+                    CmpDocBorder = {
+                        fg = transparent_background and color.surface1 or color.mantle,
+                        bg = transparent_background and color.none or color.mantle,
+                    },
+
+                    NvimTreeRootFolder = { fg = color.pink },
+                    NvimTreeIndentMarker = { fg = color.surface2 },
+
+                    -- For trouble.nvim
+                    TroubleNormal = { bg = transparent_background and color.none or color.base },
+
+                    -- For telescope.nvim
+                    TelescopeMatching = { fg = color.lavender },
+                    TelescopeResultsDiffAdd = { fg = color.green },
+                    TelescopeResultsDiffChange = { fg = color.yellow },
+                    TelescopeResultsDiffDelete = { fg = color.red },
+
+                    -- For treesitter
+                    ["@keyword.return"] = { fg = color.pink, style = clear },
+                    ["@error.c"] = { fg = color.none, style = clear },
+                    ["@error.cpp"] = { fg = color.none, style = clear },
+                }
+            end
+        },
+
+        integrations = {
+            alpha = true,
+            beacon = true,
+            cmp = true,
+            dap = {
+                enabled = true,
+                enable_ui = true, -- enable nvim-dap-ui
+            },
+            gitsigns = true,
+            illuminate = {
+                enabled = true,
+                lsp = true
+            },
+            indent_blankline = {
+                enabled = true,
+                colored_indent_levels = true,
+            },
+            lsp_saga = true,
+            lsp_trouble = true,
+            markdown = true,
+            mason = true,
+            native_lsp = {
+                enabled = true,
+                virtual_text = {
+                    errors = { 'italic' },
+                    hints = { 'italic' },
+                    warnings = { 'italic' },
+                    information = { 'italic' },
+                },
+                underlines = {
+                    errors = { 'underline' },
+                    hints = { 'underline' },
+                    warnings = { 'underline' },
+                    information = { 'underline' },
+                },
+                inlay_hints = {
+                    background = true,
+                },
+            },
+            neotest = true,
+            noice = true,
+            notifier = true,
+            nvimtree = true,
+            overseer = true,
+            rainbow_delimiters = true,
+            telescope = {
+                enabled = true,
+                style = 'nvchad'
+            },
+            treesitter = true,
+            treesitter_context = true,
+            ufo = true,
+            which_key = true,
+        },
+    }
+
+    vim.cmd [[colorscheme catppuccin]]
 end
 
-return P
+return Plugin

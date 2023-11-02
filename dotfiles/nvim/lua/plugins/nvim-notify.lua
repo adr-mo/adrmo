@@ -1,14 +1,10 @@
-local P = {
-    'rcarriga/nvim-notify',
+local Plugin = {
+  'vigoux/notifier.nvim',
+  event = 'VeryLazy'
 }
 
-function P.config()
-    local notify = require('notify')
-    notify.setup({
-        render = 'wrapped-compact',
-        stages = 'slide'
-    })
-    vim.notify = notify
+function Plugin.config()
+  require('notifier').setup()
 end
 
-return P
+return Plugin
