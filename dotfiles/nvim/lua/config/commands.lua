@@ -1,5 +1,3 @@
-local notifyOptions = { render = 'wrapped-compact', stages = 'slide' }
-
 local function __make_choice(choices, actions)
     vim.ui.select(
         choices,
@@ -47,17 +45,18 @@ local function _php_cs_fixer_choose_type()
 end
 
 local function _docker_cp(source, destination)
-    vim.notify('Sync ' .. source .. 'to ' .. destination .. ' on container', 'info', notifyOptions)
+    local message = 'Sync ' .. source .. 'to ' .. destination .. ' on container'
+    vim.notify(message)
     os.execute('docker cp ' .. source .. ' centreon-dev:' .. destination)
 end
 
 local function _docker_cp_choose_destination(source)
-    vim.ui.input({ prompt = 'Destination on container', default = "/usr/share/centreon/" .. vim.fn.expand('%') },
+    vim.ui.input({ prompt = 'Destination on container', default = "/usr/share/centreon/" .. vim.fn.fnamemodify(vim.fn.expand("%"), ":~:.") },
         function(input) _docker_cp(source, input) end)
 end
 
 local function _docker_cp_choose_source()
-    vim.ui.input({ prompt = 'Source to copy on container', default = vim.fn.expand('%') },
+    vim.ui.input({ prompt = 'Source to copy on container', default = vim.fn.fnamemodify(vim.fn.expand("%"), ":~:.") },
         function(input) _docker_cp_choose_destination(input) end)
 end
 

@@ -10,27 +10,29 @@ function P.config()
         theme = 'doom',
         config = {
             header = {
-                '',
-                '',
-                '',
-                '',
-                '',
-                '   .aMMMb  dMMMMMP dMMMMb dMMMMMMP dMMMMb  dMMMMMP .aMMMb  dMMMMb',
-                '  dMP"VMP dMP     dMP dMP   dMP   dMP.dMP dMP     dMP"dMP dMP dMP',
-                ' dMP     dMMMP   dMP dMP   dMP   dMMMMK" dMMMP   dMP dMP dMP dMP ',
-                'dMP.aMP dMP     dMP dMP   dMP   dMP"AMF dMP     dMP.aMP dMP dMP  ',
-                'VMMMP" dMMMMMP dMP dMP   dMP   dMP dMP dMMMMMP  VMMMP" dMP dMP   ',
-                '',
-                '',
-                '',
-                '',
-                '',
+                [[]],
+                [[]],
+                [[]],
+                [[]],
+                [[]],
+                [[]],
+                [[⣰⣿⣿⣿⣷⡀⠀⠀⢸⣿⣷⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀]],
+                [[⣿⣿⣿⣿⣿⣿⣄⠀⢸⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠸⠿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀]],
+                [[⣿⣿⣿⠈⢿⣿⣿⣦⢸⣿⣿⡇⠀⣠⠴⠒⠢⣄⠀⠀⣠⠴⠲⠦⣄⠐⣶⣆⠀⠀⢀⣶⡖⢰⣶⠀⢰⣶⣴⡶⣶⣆⣴⡶⣶⣶⡄]],
+                [[⣿⣿⣿⠀⠀⠻⣿⣿⣿⣿⣿⡇⢸⣁⣀⣀⣀⣘⡆⣼⠁⠀⠀⠀⠘⡇⠹⣿⡄⠀⣼⡿⠀⢸⣿⠀⢸⣿⠁⠀⢸⣿⡏⠀⠀⣿⣿]],
+                [[⠹⣿⣿⠀⠀⠀⠙⣿⣿⣿⡿⠃⢸⡀⠀⠀⠀⠀⠀⣿⠀⠀⠀⠀⢀⡏⠀⢻⣿⣸⣿⠁⠀⢸⣿⠀⢸⣿⠀⠀⢸⣿⡇⠀⠀⣿⣿]],
+                [[⠀⠈⠻⠀⠀⠀⠀⠈⠿⠋⠀⠀⠈⠳⢤⣀⣠⠴⠀⠈⠧⣄⣀⡠⠞⠁⠀⠀⠿⠿⠃⠀⠀⢸⣿⠀⢸⣿⠀⠀⠸⣿⡇⠀⠀⣿⡿]],
+                [[]],
+                [[]],
+                [[]],
+                [[]],
+                [[]],
             },
             center = {
                 {
                     icon = ' ',
                     icon_hl = 'Title',
-                    desc = 'Find File           ',
+                    desc = 'Find File',
                     desc_hl = 'String',
                     key = 'f',
                     keymap = 'SPC f f',
@@ -77,7 +79,7 @@ function P.config()
                     action = "qa"
                 },
             },
-            footer = {}         --your footer
+            footer = {} --your footer
         }
     })
 end

@@ -17,13 +17,13 @@ local P = {
     }
 }
 
+
 function P.config()
     vim.keymap.set('n', '<leader>fb', "<cmd>Telescope buffers <CR>")
     vim.keymap.set('n', '<leader>fg',
         "<cmd>lua require('telescope.builtin').live_grep({ additional_args = { '-j1' }})<CR>")
-    vim.keymap.set('n', '<leader>fh', "<cmd>lua require('telescope.builtin').oldfiles()<CR>")
-    vim.keymap.set('n', '<leader>fs',
-        "<cmd>lua require('telescope.builtin').lsp_document_symbols(require('telescope.themes').get_ivy({}))<CR>")
+    vim.keymap.set('n', '<leader>fo', "<cmd>lua require('telescope.builtin').oldfiles()<CR>")
+    vim.keymap.set('n', '<leader>fs', '<cmd>Telescope lsp_document_symbols ignore_symbols=variable,function<CR>')
     vim.keymap.set('n', '<leader>ff', '<cmd>Telescope find_files <CR>')
     vim.keymap.set("n", "<leader>fk", "<cmd>Telescope keymaps <cr>")
     vim.keymap.set("n", "<leader>fc", "<cmd>Telescope commands <cr>")
@@ -62,7 +62,7 @@ function P.config()
                     ['<C-k>'] = actions.move_selection_previous,
                     ['<C-j>'] = actions.move_selection_next,
                     ['<C-d>'] = actions.delete_buffer,
-                    ["<esc>"] = actions.close
+                    ["<esc>"] = actions.close,
                 },
             },
             file_ignore_patterns = { '.git/', 'node_modules/' },
@@ -110,12 +110,12 @@ function P.config()
             docker = {
                 -- These are the default values
                 theme = "dropdown",
-                binary = "docker",         -- in case you want to use podman or something
+                binary = "docker", -- in case you want to use podman or something
                 compose_binary = "docker compose",
                 buildx_binary = "docker buildx",
                 machine_binary = "docker-machine",
                 log_level = vim.log.levels.INFO,
-                init_term = "tabnew",         -- "vsplit new", "split new", ...
+                init_term = "tabnew", -- "vsplit new", "split new", ...
             },
         },
     })
