@@ -1,17 +1,20 @@
-local options = { noremap = true, silent = true }
+table.unpack = table.unpack or unpack
 
 local on_attach = function()
-    vim.keymap.set('n', '<Leader>d', vim.diagnostic.open_float, options)
-    vim.keymap.set('n', '<Leader>a', vim.lsp.buf.code_action, options)
-    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, options)
-    vim.keymap.set('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>')
-    vim.keymap.set('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>')
-    vim.keymap.set('n', 'gd', '<cmd>:Telescope lsp_definitions<CR>')
-    vim.keymap.set('n', 'gr', '<cmd>:Telescope lsp_references<CR>')
-    vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>')
-    vim.keymap.set('n', '<Leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>')
+    local options = { noremap = true, silent = true }
+
+    vim.keymap.set('n', 'gr', '<cmd>Telescope lsp_references<CR>', options)
+    vim.keymap.set('n', 'K', '<cmd>vim.lsp.buf.hover<CR>')
+    vim.keymap.set('n', '<leader>d', vim.diagnostic.open_float)
+    vim.keymap.set({ 'n', 'v' }, '<space>ca', vim.lsp.buf.code_action, options)
+    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, {table.unpack(options), desc = 'Go to implementation'})
+    vim.keymap.set('n', '[d', '<cmd>vim.diagnostic.goto_prev<CR>')
+    vim.keymap.set('n', ']d', '<cmd>vim.diagnostic.goto_next<CR>')
+    vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>')
     vim.keymap.set('n', '<leader>lf', '<cmd>lua vim.lsp.buf.format()<CR>')
-    vim.keymap.set('n', '<C-K>', vim.lsp.buf.signature_help, 'Signature Documentation')
+    vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
+    vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, options)
+    vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, options)
 end
 
 local languages = {

@@ -1,6 +1,6 @@
 local P = {
     "nvim-telescope/telescope.nvim",
-    tag = "0.1.1",
+    tag = "0.1.4",
     dependencies = {
         "nvim-lua/plenary.nvim",
         "nvim-telescope/telescope-media-files.nvim",
@@ -16,7 +16,6 @@ local P = {
         'LukasPietzschmann/telescope-tabs',
     }
 }
-
 
 function P.config()
     vim.keymap.set('n', '<leader>fb', "<cmd>Telescope buffers <CR>")

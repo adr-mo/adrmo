@@ -20,7 +20,7 @@ local function _phpstan_toggle(input)
 end
 
 local function _phpstan_choose_type()
-    vim.ui.input({ prompt = 'File / Directory to analyze', default = vim.fn.expand('%') },
+    vim.ui.input({ prompt = 'File / Directory to analyze', default = vim.fn.fnamemodify(vim.fn.expand("%"), ":~:.") },
         function(input) _phpstan_toggle(input) end)
 end
 
@@ -31,12 +31,12 @@ local function _php_cs_fixer(option, filename)
 end
 
 local function _php_cs_fixer_fix_toggle()
-    vim.ui.input({ prompt = 'File / Directory to fix', default = vim.fn.expand('%') },
+    vim.ui.input({ prompt = 'File / Directory to fix', default = vim.fn.fnamemodify(vim.fn.expand("%"), ":~:.") },
         function(input) _php_cs_fixer('', input) end)
 end
 
 local function _php_cs_fixer_dry_toggle()
-    vim.ui.input({ prompt = 'File / Directory to analyze', default = vim.fn.expand('%') },
+    vim.ui.input({ prompt = 'File / Directory to analyze', default = vim.fn.fnamemodify(vim.fn.expand("%"), ":~:.") },
         function(input) _php_cs_fixer('--dry-run', input) end)
 end
 
@@ -70,6 +70,73 @@ local function _docker_enter()
     enter_container:toggle()
 end
 
+local function _docker_php_clear_cache()
+    local Terminal = require('toggleterm.terminal').Terminal
+    local php_logs = Terminal:new({
+        cmd = 'docker exec -ti centreon-dev sudo -u apache /usr/bin/php /usr/share/centreon/bin/console c:c',
+        direction = 'horizontal',
+        close_on_exit = false
+    })
+    php_logs:toggle()
+end
+
+local function _docker_show_php_logs()
+    local Terminal = require('toggleterm.terminal').Terminal
+    local php_logs = Terminal:new({
+        cmd = 'docker exec -ti centreon-dev tail -f /var/log/php-fpm/centreon-error.log',
+        direction = 'horizontal',
+        close_on_exit = false
+    })
+    php_logs:toggle()
+end
+
+local function _docker_show_engine_logs()
+    local Terminal = require('toggleterm.terminal').Terminal
+    local php_logs = Terminal:new({
+        cmd = 'docker exec -ti centreon-dev tail -f /var/log/centreon-engine/centengine.log',
+        direction = 'horizontal',
+        close_on_exit = false
+    })
+    php_logs:toggle()
+end
+
+local function _docker_show_centreon_web_logs()
+    local Terminal = require('toggleterm.terminal').Terminal
+    local php_logs = Terminal:new({
+        cmd = 'docker exec -ti centreon-dev tail -f /var/log/centreon/centreon-web.log',
+        direction = 'horizontal',
+        close_on_exit = false
+    })
+    php_logs:toggle()
+end
+
+local function _docker_show_sql_logs()
+    local Terminal = require('toggleterm.terminal').Terminal
+    local php_logs = Terminal:new({
+        cmd = 'docker exec -ti centreon-dev tail -f /var/log/centreon/sql-error.log',
+        direction = 'horizontal',
+        close_on_exit = false
+    })
+    php_logs:toggle()
+end
+
+local function _docker_choose_logs()
+    __make_choice(
+        {
+            'centreon-error.log',
+            'centreon-web.log',
+            'sql-error.log',
+            'centengine.log',
+        },
+        {
+            ['centreon-error.log'] = _docker_show_php_logs,
+            ['centreon-web.log'] = _docker_show_centreon_web_logs,
+            ['sql-error.log'] = _docker_show_sql_logs,
+            ['centengine.log'] = _docker_show_engine_logs
+        }
+    )
+end
+
 local function _centreon_database()
     vim.cmd[[ :tabnew | DBUIToggle ]]
 end
@@ -79,15 +146,19 @@ local cases = {
     ['php-cs-fixer'] = _php_cs_fixer_choose_type,
     ['docker-cp'] = _docker_cp_choose_source,
     ['docker-enter'] = _docker_enter,
-    ['database'] = _centreon_database
+    ['docker-logs'] = _docker_choose_logs,
+    ['database'] = _centreon_database,
+    ['php-clear-cache'] = _docker_php_clear_cache,
 }
 
 local choices = {
     'docker-cp',
     'docker-enter',
+    'docker-logs',
     'database',
     'phpstan',
-    'php-cs-fixer'
+    'php-cs-fixer',
+    'php-clear-cache',
 }
 
 local devOptions = function()

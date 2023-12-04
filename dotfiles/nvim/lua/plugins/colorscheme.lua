@@ -1,153 +1,49 @@
 local Plugin = {
-    'catppuccin/nvim',
-    name = "catppuccin",
+    "folke/tokyonight.nvim",
     lazy = false,
     priority = 1000,
+    opts = {},
 }
 
 function Plugin.config()
-    local catppuccin = require('catppuccin')
-    local transparent_background = true
-    local clear = {}
-
-    catppuccin.setup {
-        flavor = 'macchiato',
-        transparent_background = transparent_background,
-        term_colors = true,
-        diam_inactive = {
-            enabled = false,   -- dims the background color of inactive window
-            shade = 'dark',
-            percentage = 0.15, -- percentage of the shade to apply to the inactive window
-        },
-        styles = {             -- Handles the styles of general hi groups (see `:h highlight-args`):
-            comments = { 'italic' }, -- Change the style of comments
-            conditionals = { 'italic' },
-            loops = {},
+    require("tokyonight").setup({
+        -- your configuration comes here
+        -- or leave it empty to use the default settings
+        style = "night",        -- The theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`
+        light_style = "day",    -- The theme is used when the background is set to light
+        transparent = false,    -- Enable this to disable setting the background color
+        terminal_colors = true, -- Configure the colors used when opening a `:terminal` in [Neovim](https://github.com/neovim/neovim)
+        styles = {
+            -- Style to be applied to different syntax groups
+            -- Value is any valid attr-list value for `:help nvim_set_hl`
+            comments = { italic = true },
+            keywords = { italic = true },
             functions = {},
-            keywords = {},
-            startings = {},
             variables = {},
-            numbers = {},
-            booleans = {},
-            properties = {},
-            types = {},
-            operators = {},
+            -- Background styles. Can be "dark", "transparent" or "normal"
+            sidebars = "dark",                               -- style for sidebars, see below
+            floats = "dark",                                 -- style for floating windows
         },
-        color_overrides = {},
-        highlight_overrides = {
-            all = function(color)
-                return {
-                    -- For base configs
-                    NormalFloat = { fg = color.text, bg = transparent_background and color.none or color.mantle },
-                    FloatBorder = {
-                        fg = transparent_background and color.blue or color.mantle,
-                        bg = transparent_background and color.none or color.mantle,
-                    },
-                    CursorLineNr = { fg = color.green },
+        sidebars = { "qf", "help", "terminal", "NvimTree" }, -- Set a darker background on sidebar-like windows. For example: `["qf", "vista_kind", "terminal", "packer"]`
+        day_brightness = 0.3,                                -- Adjusts the brightness of the colors of the **Day** style. Number between 0 and 1, from dull to vibrant colors
+        hide_inactive_statusline = false,                    -- Enabling this option, will hide inactive statuslines and replace them with a thin border instead. Should work with the standard **StatusLine** and **LuaLine**.
+        dim_inactive = false,                                -- dims inactive windows
+        lualine_bold = true,                                 -- When `true`, section headers in the lualine theme will be bold
 
-                    -- For native lsp configs
-                    diagnosticVirtualTextError = { bg = color.none },
-                    DiagnosticVirtualTextWarn = { bg = color.basenone },
-                    DiagnosticVirtualTextInfo = { bg = color.none },
-                    DiagnosticVirtualTextHint = { bg = color.none },
-                    LspInfoBorder = { link = "FloatBorder" },
+        --- You can override specific color groups to use other groups or a hex color
+        --- function will be called with a ColorScheme table
+        ---@param colors ColorScheme
+        on_colors = function(colors) end,
 
-                    -- For mason.nvim
-                    MasonNormal = { link = "NormalFloat" },
+        --- You can override specific highlights to use other groups or a hex color
+        --- function will be called with a Highlights and ColorScheme table
+        ---@param highlights Highlights
+        ---@param colors ColorScheme
+        on_highlights = function(highlights, colors)
+        end,
+    })
 
-                        -- For indent-blankline
-                    IblIndent = { fg = color.surface0 },
-                    IblScope = { fg = color.surface2, style = { "bold" } },
-
-                    -- For completion menu 
-                    Pmenu = { fg = color.overlay2, bg = transparent_background and color.none or color.base },
-                    PmenuBorder = { fg = color.surface1, bg = transparent_background and color.none or color.base },
-                    PmenuSel = { bg = color.green, fg = color.base },
-                    CmpItemAbbr = { fg = color.overlay2 },
-                    CmpItemAbbrMatch = { fg = color.blue, style = { "bold" } },
-                    CmpDoc = { link = "NormalFloat" },
-                    CmpDocBorder = {
-                        fg = transparent_background and color.surface1 or color.mantle,
-                        bg = transparent_background and color.none or color.mantle,
-                    },
-
-                    NvimTreeRootFolder = { fg = color.pink },
-                    NvimTreeIndentMarker = { fg = color.surface2 },
-
-                    -- For trouble.nvim
-                    TroubleNormal = { bg = transparent_background and color.none or color.base },
-
-                    -- For telescope.nvim
-                    TelescopeMatching = { fg = color.lavender },
-                    TelescopeResultsDiffAdd = { fg = color.green },
-                    TelescopeResultsDiffChange = { fg = color.yellow },
-                    TelescopeResultsDiffDelete = { fg = color.red },
-
-                    -- For treesitter
-                    ["@keyword.return"] = { fg = color.pink, style = clear },
-                    ["@error.c"] = { fg = color.none, style = clear },
-                    ["@error.cpp"] = { fg = color.none, style = clear },
-                }
-            end
-        },
-
-        integrations = {
-            alpha = true,
-            beacon = true,
-            cmp = true,
-            dap = {
-                enabled = true,
-                enable_ui = true, -- enable nvim-dap-ui
-            },
-            gitsigns = true,
-            illuminate = {
-                enabled = true,
-                lsp = true
-            },
-            indent_blankline = {
-                enabled = true,
-                colored_indent_levels = true,
-            },
-            lsp_saga = true,
-            lsp_trouble = true,
-            markdown = true,
-            mason = true,
-            native_lsp = {
-                enabled = true,
-                virtual_text = {
-                    errors = { 'italic' },
-                    hints = { 'italic' },
-                    warnings = { 'italic' },
-                    information = { 'italic' },
-                },
-                underlines = {
-                    errors = { 'underline' },
-                    hints = { 'underline' },
-                    warnings = { 'underline' },
-                    information = { 'underline' },
-                },
-                inlay_hints = {
-                    background = true,
-                },
-            },
-            neotest = true,
-            noice = true,
-            notifier = true,
-            nvimtree = true,
-            overseer = true,
-            rainbow_delimiters = true,
-            telescope = {
-                enabled = true,
-                style = 'nvchad'
-            },
-            treesitter = true,
-            treesitter_context = true,
-            ufo = true,
-            which_key = true,
-        },
-    }
-
-    vim.cmd [[colorscheme catppuccin]]
+    vim.cmd [[colorscheme tokyonight]]
 end
 
 return Plugin

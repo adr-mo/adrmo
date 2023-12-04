@@ -11,7 +11,6 @@ function P.config()
 
         },
         exclude = {
-
             filetypes = {
                 'help',
                 'lazy',
