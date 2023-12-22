@@ -134,7 +134,7 @@ function P.config()
                 winhighlight = "Normal:CmpDoc",
             },
         },
-        --
+
         -- experimental = {
         --     ghost_text = {
         --         hl_group = "CmpItemKindKeyword",
@@ -166,7 +166,6 @@ function P.config()
 
     -- Add snippets from Friendly Snippets
     require('luasnip/loaders/from_vscode').lazy_load()
-    require("luasnip.loaders.from_lua").load({ paths = "~/.config/nvim/lua/snippets/" })
 end
 
 return P

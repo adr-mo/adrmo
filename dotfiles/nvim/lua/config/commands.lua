@@ -2,8 +2,8 @@ local function __make_choice(choices, actions)
     vim.ui.select(
         choices,
         {
-            prompt = "Development options",
-            telescope = require("telescope.themes").get_dropdown(),
+            prompt = "What do you want to do ?",
+            telescope = require("telescope.themes").get_ivy(),
         },
         function(selected)
             if actions[selected] then
@@ -30,6 +30,12 @@ local function _php_cs_fixer(option, filename)
     )
 end
 
+local function _pest(filename)
+    require('toggleterm').exec(
+        "./vendor/bin/pest " .. filename
+    )
+end
+
 local function _php_cs_fixer_fix_toggle()
     vim.ui.input({ prompt = 'File / Directory to fix', default = vim.fn.fnamemodify(vim.fn.expand("%"), ":~:.") },
         function(input) _php_cs_fixer('', input) end)
@@ -38,6 +44,12 @@ end
 local function _php_cs_fixer_dry_toggle()
     vim.ui.input({ prompt = 'File / Directory to analyze', default = vim.fn.fnamemodify(vim.fn.expand("%"), ":~:.") },
         function(input) _php_cs_fixer('--dry-run', input) end)
+end
+
+local function _pest_execute_test()
+    vim.ui.input(
+        { prompt = 'Test file / Directory to execute', default = vim.fn.fnamemodify(vim.fn.expand("%"), ":~:.") },
+        function(input) _pest(input) end)
 end
 
 local function _php_cs_fixer_choose_type()
@@ -51,7 +63,9 @@ local function _docker_cp(source, destination)
 end
 
 local function _docker_cp_choose_destination(source)
-    vim.ui.input({ prompt = 'Destination on container', default = "/usr/share/centreon/" .. vim.fn.fnamemodify(vim.fn.expand("%"), ":~:.") },
+    vim.ui.input(
+        { prompt = 'Destination on container', default = "/usr/share/centreon/" ..
+        vim.fn.fnamemodify(vim.fn.expand("%"), ":~:.") },
         function(input) _docker_cp(source, input) end)
 end
 
@@ -138,12 +152,13 @@ local function _docker_choose_logs()
 end
 
 local function _centreon_database()
-    vim.cmd[[ :tabnew | DBUIToggle ]]
+    vim.cmd [[ :tabnew | DBUIToggle ]]
 end
 
 local cases = {
     ['phpstan'] = _phpstan_choose_type,
     ['php-cs-fixer'] = _php_cs_fixer_choose_type,
+    ['pest'] = _pest_execute_test,
     ['docker-cp'] = _docker_cp_choose_source,
     ['docker-enter'] = _docker_enter,
     ['docker-logs'] = _docker_choose_logs,
@@ -157,6 +172,7 @@ local choices = {
     'docker-logs',
     'database',
     'phpstan',
+    'pest',
     'php-cs-fixer',
     'php-clear-cache',
 }
@@ -165,13 +181,14 @@ local devOptions = function()
     __make_choice(choices, cases)
 end
 
-vim.keymap.set('n', '<leader>dev', devOptions)
+vim.keymap.set('n', '<leader>dv', devOptions)
 
 vim.o.confirm = true
 vim.api.nvim_create_autocmd("BufEnter", {
-    group = vim.api.nvim_create_augroup("NvimTreeClose", {clear = true}),
+    group = vim.api.nvim_create_augroup("NvimTreeClose", { clear = true }),
     callback = function()
         local layout = vim.api.nvim_call_function("winlayout", {})
-        if layout[1] == "leaf" and vim.api.nvim_buf_get_option(vim.api.nvim_win_get_buf(layout[2]), "filetype") == "NvimTree" and layout[3] == nil then vim.cmd("quit") end
+        if layout[1] == "leaf" and vim.api.nvim_buf_get_option(vim.api.nvim_win_get_buf(layout[2]), "filetype") == "NvimTree" and layout[3] == nil then
+            vim.cmd("quit") end
     end
 })

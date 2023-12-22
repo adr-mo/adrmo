@@ -68,22 +68,16 @@ function P.config()
         },
         pickers = {
             find_files = {
-                theme = 'dropdown',
+                theme = 'ivy',
                 prompt_title = 'Find files',
                 hidden = true,
-                previewer = false,
-                layout_config = {
-                    width = 0.6,
-                },
+                previewer = true,
             },
             buffers = {
-                theme = 'dropdown',
+                theme = 'ivy',
                 prompt_title = 'Opened files',
                 hidden = true,
-                previewer = false,
-                layout_config = {
-                    width = 0.6,
-                },
+                previewer = true,
                 mappings = {
                     i = {
                         ["<c-d>"] = actions.delete_buffer + actions.move_to_top,
@@ -91,24 +85,29 @@ function P.config()
                 }
             },
             oldfiles = {
-                prompt_title = 'History',
+                prompt_title = 'Old files',
+                theme = 'ivy',
+                previewer = true
             },
             lsp_references = {
-                previewer = false,
+                previewer = true,
+                theme = 'ivy',
             },
             lsp_definitions = {
-                previewer = false,
+                previewer = true,
+                theme = 'ivy'
             },
             lsp_document_symbols = {
-                symbol_width = 55,
-                previewer = false
+                prompt_title = 'Document symbols',
+                theme = 'ivy',
+                previewer = true
             },
         },
         extensions = {
             -- NOTE: this setup is optional
             docker = {
                 -- These are the default values
-                theme = "dropdown",
+                theme = "ivy",
                 binary = "docker", -- in case you want to use podman or something
                 compose_binary = "docker compose",
                 buildx_binary = "docker buildx",
