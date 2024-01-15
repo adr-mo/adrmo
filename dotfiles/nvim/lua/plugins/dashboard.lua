@@ -30,6 +30,13 @@ function P.config()
             },
             center = {
                 {
+                    icon = ' ',
+                    desc = 'New file',
+                    desc_hl = 'String',
+                    key = 'n',
+                    action = 'ene | startinsert'
+                },
+                {
                     icon = ' ',
                     icon_hl = 'Title',
                     desc = 'Find File',
@@ -38,6 +45,13 @@ function P.config()
                     keymap = 'SPC f f',
                     key_hl = 'Number',
                     action = 'Telescope find_files'
+                },
+                {
+                    icon = ' ',
+                    desc = 'Explorer',
+                    key = 'e',
+                    keymap = 'SPC e',
+                    action = "NvimTreeOpen"
                 },
                 {
                     icon = '󰊄 ',

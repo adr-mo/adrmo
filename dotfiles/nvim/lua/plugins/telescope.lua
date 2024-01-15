@@ -56,6 +56,15 @@ function P.config()
                 prompt_position = 'top',
             },
             sorting_strategy = 'ascending',
+            vimgrep_arguments = {
+                "rg",
+                "--no-heading",
+                "--with-filename",
+                "--line-number",
+                "--column",
+                "--follow",
+                "--smart-case",
+            },
             mappings = {
                 i = {
                     ['<C-k>'] = actions.move_selection_previous,
@@ -65,6 +74,7 @@ function P.config()
                 },
             },
             file_ignore_patterns = { '.git/', 'node_modules/' },
+            -- initial_mode = 'normal',
         },
         pickers = {
             find_files = {
