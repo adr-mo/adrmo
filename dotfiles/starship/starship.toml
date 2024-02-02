@@ -1,43 +1,70 @@
+add_newline = false
+
 format = """
 $username\
-$hostname\
 $directory\
 $git_branch\
+$git_commit\
 $git_state\
 $git_status\
 $character"""
 
-[directory]
-style = "blue"
+[line_break]
+disabled = true
+
+[username]
+style_root = "red bold"
+format = " [$user](bold green) "
+disabled = false
+show_always = true
 
 [character]
-success_symbol = "[❯](purple)"
-error_symbol = "[❯](red)"
-vimcmd_symbol = "[❮](green)"
+success_symbol = "[>](bold green)"
+error_symbol = "[x](bold red)"
+vimcmd_symbol = "[<](bold green)"
 
+[directory]
+truncation_length = 5
+truncation_symbol = " "
+format = "[$path]($style)[$read_only]($read_only_style) "
+read_only = "🔒"
+style = "bold cyan"
+
+[directory.substitutions]
+Applications = " "
+Documents = "󰈔 "
+Downloads = " "
+Music = "󰎈 "
+Pictures = "󰋩 "
+Videos = " "
+
+#git
 [git_branch]
-format = "[$branch]($style)"
-style = "bright-black"
-
-[git_status]
-format = "[[(*$conflicted$untracked$modified$staged$renamed$deleted)](218) ($ahead_behind$stashed)]($style)"
-style = "cyan"
-conflicted = "​"
-untracked = "​"
-modified = "​"
-staged = "​"
-renamed = "​"
-deleted = "​"
-stashed = "≡"
+format = "[$symbol$branch]($style) "
+symbol = "󰊢 "
+style = "bold green"
+always_show_remote = false
+only_attached = false
+disabled = false
 
 [git_state]
-format = '\([$state( $progress_current/$progress_total)]($style)\) '
-style = "bright-black"
+format = '[\($state( $progress_current of $progress_total)\)]($style) '
+style = "bold yellow"
 
-[cmd_duration]
-format = "[$duration]($style) "
-style = "yellow"
+[git_commit]
+commit_hash_length = 4
+style = "bold white"
+tag_symbol = " 🏷 "
 
-[python]
-format = "[$virtualenv]($style) "
-style = "bright-black"
+[git_status]
+conflicted = "⚔️ "
+ahead = "⇡"
+behind = "[⇣${count}](bold dimmed blue)"
+diverged = "⇕${ahead_count}⇣${behind_count}"
+untracked = "[?${count}](bold blue)"
+modified ="[!${count}](bold yellow)"
+staged = "[+${count}](bold yellow)"
+renamed = "» ×${count}"
+deleted = "[✘ ×${count}](bold red)"
+format = "$all_status$ahead_behind"
+
