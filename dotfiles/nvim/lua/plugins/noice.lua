@@ -1,76 +1,28 @@
-local Plugin = {
+return {
     'folke/noice.nvim',
     event = 'VeryLazy',
     dependencies = {
         'MunifTanjim/nui.nvim',
         'nvim-telescope/telescope.nvim',
-    }
-}
-
-function Plugin.config()
-  require('noice').setup {
-    cmdline = {
-      enabled = true, -- enable Noice cmdline UI
-      view = 'cmdline_popup', -- view for rendering the cmdline. Change to `cmdline_popup` to get a cmdline popup at the center
     },
-    messages = {
-      -- NOTE: If you enable messages, then the cmdline is enabled automatically.
-      enabled = false, -- enable Noice messages UI
-    },
-    popupmenu = {
-      enabled = true, -- enable Noice popupmenu UI
-      ---@type 'nui'|'cmp'
-      backend = 'cmp', -- use cmp as a backend to show cmdline completions
-      -- Icons for completion item kinds (see defaults at noice.config.icons.kinds)
-      kind_icons = require('config.icons').kind, -- set to `false` to disable icons
-    },
-    notify = {
-      -- Turn off noice as `vim.notify`
-      enabled = false,
-    },
-    lsp = {
-        progress = {
-            enabled = true,
-            view = 'mini',
-        },
-        override = {
-            override = {
-                ['vim.lsp.util.convert_input_to_markdown_lines'] = true,
-                ['vim.lsp.util.stylize_markdown'] = true,
-                ['cmp.entry.get_documentation'] = true,
+    config = function()
+        require("noice").setup({
+            lsp = {
+                -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+                override = {
+                    ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+                    ["vim.lsp.util.stylize_markdown"] = true,
+                    ["cmp.entry.get_documentation"] = false, -- requires hrsh7th/nvim-cmp
+                },
             },
-        },
-        hover = {
-            enabled = false,
-        },
-        signature = {
-            enabled = false,
-        },
-        message = {
-            -- Messages shown by lsp servers
-            enabled = false,
-        },
-    },
-    presets = {
-      -- you can enable a preset by setting it to true, or a table that will override the preset config
-      -- you can also add custom presets that you can enable/disable with enabled=true
-      bottom_search = false, -- turn on to use a classic bottom cmdline for search
-      command_palette = false, -- turn on to position the cmdline and popupmenu together
-      long_message_to_split = true, -- turn on to send long messages to a split
-      inc_rename = false, -- turn on to enable an input dialog for inc-rename.nvim
-      lsp_doc_border = 'rounded', -- add a border to hover docs and signature help
-    },
-    views = {
-        mini = {
-            position = {
-                row = -2,
-                col = "100%",
-            }
-        },
-    },
-  }
-
-  require('telescope').load_extension('noice')
-end
-
-return Plugin
+            -- you can enable a preset for easier configuration
+            presets = {
+                bottom_search = false,    -- use a classic bottom cmdline for search
+                command_palette = true,   -- position the cmdline and popupmenu together
+                long_message_to_split = false, -- long messages will be sent to a split
+                inc_rename = false,       -- enables an input dialog for inc-rename.nvim
+                lsp_doc_border = false,   -- add a border to hover docs and signature help
+            },
+        })
+    end
+}

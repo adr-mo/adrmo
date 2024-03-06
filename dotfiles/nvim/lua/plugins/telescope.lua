@@ -78,16 +78,28 @@ function P.config()
         },
         pickers = {
             find_files = {
-                theme = 'ivy',
-                prompt_title = 'Find files',
+                theme = 'dropdown',
+                prompt_title = 'Lookup files',
                 hidden = true,
-                previewer = true,
+                previewer = false,
+                layout_strategy = 'vertical',
+                layout_config = {
+                    prompt_position = 'bottom',
+                    vertical = { width = 0.9, height = 0.9 }
+                },
+                sorting_strategy = 'descending',
             },
             buffers = {
-                theme = 'ivy',
-                prompt_title = 'Opened files',
+                theme = 'dropdown',
+                prompt_title = 'Lookup buffers',
                 hidden = true,
-                previewer = true,
+                previewer = false,
+                layout_strategy = 'vertical',
+                layout_config = {
+                    prompt_position = 'bottom',
+                    vertical = { width = 0.9, height = 0.9 }
+                },
+                sorting_strategy = 'descending',
                 mappings = {
                     i = {
                         ["<c-d>"] = actions.delete_buffer + actions.move_to_top,
@@ -95,21 +107,51 @@ function P.config()
                 }
             },
             oldfiles = {
-                prompt_title = 'Old files',
-                theme = 'ivy',
-                previewer = true
+                previewer = false,
+                theme = 'dropdown',
+                hidden = true,
+                layout_strategy = 'vertical',
+                layout_config = {
+                    prompt_position = 'bottom',
+                    vertical = { width = 0.9, height = 0.9 }
+                },
+                sorting_strategy = 'descending',
+                prompt_title = 'Recent files',
             },
             lsp_references = {
                 previewer = true,
-                theme = 'ivy',
+                theme = 'dropdown',
+                hidden = true,
+                layout_strategy = 'horizontal',
+                layout_config = {
+                    prompt_position = 'bottom',
+                    horizontal = { width = 0.9, height = 0.9 }
+                },
+                sorting_strategy = 'descending',
+                prompt_title = 'LSP references',
             },
             lsp_definitions = {
                 previewer = true,
-                theme = 'ivy'
+                theme = 'dropdown',
+                hidden = true,
+                layout_strategy = 'vertical',
+                layout_config = {
+                    prompt_position = 'bottom',
+                    vertical = { width = 0.9, height = 0.9 }
+                },
+                sorting_strategy = 'descending',
+                prompt_title = 'LSP definitions',
             },
             lsp_document_symbols = {
+                theme = 'dropdown',
+                hidden = true,
+                layout_strategy = 'horizontal',
+                layout_config = {
+                    prompt_position = 'bottom',
+                    horizontal = { width = 0.9, height = 0.9 }
+                },
+                sorting_strategy = 'descending',
                 prompt_title = 'Document symbols',
-                theme = 'ivy',
                 previewer = true
             },
         },

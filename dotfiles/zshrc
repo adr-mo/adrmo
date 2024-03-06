@@ -24,6 +24,7 @@ alias lg="lazygit"
 alias exec-phpstan="./vendor/bin/phpstan analyze --configuration=phpstan.core.neon --level=max" 
 alias centreon-dev="docker exec -ti centreon-dev bash"
 alias ll='ls -lah'
+alias nv="nvim"
 
 ### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
 export PATH="/Users/Adrien/.rd/bin:$PATH"
@@ -35,3 +36,5 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+export PATH=$PATH:/Users/Adrien/.spicetify

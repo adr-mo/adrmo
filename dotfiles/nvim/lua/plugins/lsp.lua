@@ -7,7 +7,8 @@ local on_attach = function()
     vim.keymap.set('n', 'K', vim.lsp.buf.hover)
     vim.keymap.set('n', '<leader>d', vim.diagnostic.open_float)
     vim.keymap.set({ 'n', 'v' }, '<space>ca', vim.lsp.buf.code_action, options)
-    vim.keymap.set('n', 'gi', '<cmd>Telescope lsp_implementations<CR>', {table.unpack(options), desc = 'Go to implementation'})
+    vim.keymap.set('n', 'gi', '<cmd>Telescope lsp_implementations<CR>',
+        { table.unpack(options), desc = 'Go to implementation' })
     vim.keymap.set('n', '[d', '<cmd>vim.diagnostic.goto_prev<CR>')
     vim.keymap.set('n', ']d', '<cmd>vim.diagnostic.goto_next<CR>')
     vim.keymap.set('n', 'gd', '<cmd>Telescope lsp_definitions<CR>')
@@ -96,7 +97,15 @@ return {
                     },
                 },
                 on_attach = on_attach,
-                capabilities = capabilities
+                capabilities = capabilities,
+                settings = {
+                    phpdoc = {
+                        returnVoid = false,
+                    },
+                    environment = {
+                        phpVersion = "8.1"
+                    }
+                },
             })
 
             for _, language in pairs(languages) do
@@ -130,7 +139,7 @@ return {
     },
     {
         'williamboman/mason-lspconfig.nvim',
-        config = function ()
+        config = function()
             require('mason-lspconfig').setup({
                 ensure_installed = languages
             })

@@ -25,6 +25,12 @@ function P.config()
     local luasnip = require('luasnip')
     local icons = require('config.icons')
 
+    luasnip.setup({
+        keys = function()
+            return {}
+        end,
+    })
+
     local border = function(hl)
         return {
             { '╭', hl },
@@ -93,11 +99,10 @@ function P.config()
         sources = cmp.config.sources({
             { name = 'nvim_lsp' },                -- LSP
             { name = 'nvim_lsp_signature_help' }, -- LSP for parameters in functions
-            { name = 'nvim_lua' },                -- Lua Neovim API
             { name = 'luasnip' },                 -- Luasnip
+            { name = 'buffer' },
+            { name = 'nvim_lua' },                -- Lua Neovim API
             { name = 'path' },                    -- Paths
-        }, {
-            { name = 'buffer' }
         }),
 
         formatting = {
@@ -106,7 +111,7 @@ function P.config()
             format = lspkind.cmp_format {
                 -- defines how annotations are shown
                 -- options: 'text', 'text_symbol', 'symbol_text', 'symbol'
-                mode = 'symbol_text',
+                mode = 'text_symbol',
                 maxwidth = 50,         -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
                 ellipsis_char = '...', -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
                 -- symbol map, defaults or codicons
@@ -118,7 +123,6 @@ function P.config()
                     buffer = icons.lsp.Buffer,
                     path = icons.lsp.Path,
                     nvim_lua = icons.lsp.Lua,
-                    latex_symbols = icons.lsp.Latex,
                 }
             }
         },
@@ -126,8 +130,9 @@ function P.config()
         window = {
             completion = {
                 border = border("PmenuBorder"),
-                winhighlight = "Normal:Pmenu,CursorLine:PmenuSel,Search:PmenuSel",
-                scrollbar = false,
+                winhighlight = "Normal:CmpDoc,CursorLine:PmenuSel,Search:PmenuSel",
+                -- winhighlight = "Normal:Pmenu,CursorLine:PmenuSel,Search:PmenuSel",
+                scrollbar = true,
             },
             documentation = {
                 border = border("CmpDocBorder"),

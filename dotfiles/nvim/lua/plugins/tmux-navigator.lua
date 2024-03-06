@@ -1,9 +1,9 @@
-local P = {
+local Plugin = {
     "christoomey/vim-tmux-navigator",
 }
 
-function P.init()
+function Plugin.init()
     vim.g.tmux_navigator_disable_when_zoomed = 1
 end
 
-return P
+return Plugin

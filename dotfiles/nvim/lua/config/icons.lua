@@ -42,9 +42,6 @@ return {
 		StaticMethod = "",
 		Macro = "",
     },
-
-    cmp = {
-	},
 	dap = {
 		Breakpoint = "󰝥",
 		BreakpointCondition = "󰟃",
@@ -65,7 +62,6 @@ return {
         Collapsed = '',
         Circular = '',
     },
-
     git = {
         LineAdded = '',
         LineModified = '',
@@ -84,7 +80,6 @@ return {
         Branch = '',
 		Git = "󰊢",
 	},
-
     lsp = {
         Server = ' ',
         Lsp = '',
@@ -99,14 +94,12 @@ return {
 		Treesitter = "",
 		Undefined = "",
     },
-
     file = {
         ReadOnly = '',
         New = '',
         Modified = '●',
         Path = '',
     },
-
     diagnostics = {
         Diagnostic = "󰒡",
         Debug = '',
@@ -116,7 +109,6 @@ return {
         Hint = "󰌶",
         Trace = '󰙈',
     },
-
     ui = {
         ChevronRight = "",
         Separator = "",

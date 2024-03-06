@@ -8,6 +8,9 @@ function P.config()
     local d = require('dashboard')
     d.setup({
         theme = 'doom',
+        week_header = {
+            enable = true,
+        },
         config = {
             header = {
                 [[]],
@@ -16,18 +19,22 @@ function P.config()
                 [[]],
                 [[]],
                 [[]],
-                [[⣰⣿⣿⣿⣷⡀⠀⠀⢸⣿⣷⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀]],
-                [[⣿⣿⣿⣿⣿⣿⣄⠀⢸⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠸⠿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀]],
-                [[⣿⣿⣿⠈⢿⣿⣿⣦⢸⣿⣿⡇⠀⣠⠴⠒⠢⣄⠀⠀⣠⠴⠲⠦⣄⠐⣶⣆⠀⠀⢀⣶⡖⢰⣶⠀⢰⣶⣴⡶⣶⣆⣴⡶⣶⣶⡄]],
-                [[⣿⣿⣿⠀⠀⠻⣿⣿⣿⣿⣿⡇⢸⣁⣀⣀⣀⣘⡆⣼⠁⠀⠀⠀⠘⡇⠹⣿⡄⠀⣼⡿⠀⢸⣿⠀⢸⣿⠁⠀⢸⣿⡏⠀⠀⣿⣿]],
-                [[⠹⣿⣿⠀⠀⠀⠙⣿⣿⣿⡿⠃⢸⡀⠀⠀⠀⠀⠀⣿⠀⠀⠀⠀⢀⡏⠀⢻⣿⣸⣿⠁⠀⢸⣿⠀⢸⣿⠀⠀⢸⣿⡇⠀⠀⣿⣿]],
-                [[⠀⠈⠻⠀⠀⠀⠀⠈⠿⠋⠀⠀⠈⠳⢤⣀⣠⠴⠀⠈⠧⣄⣀⡠⠞⠁⠀⠀⠿⠿⠃⠀⠀⢸⣿⠀⢸⣿⠀⠀⠸⣿⡇⠀⠀⣿⡿]],
+                [[]],
+                [[]],
+                [[]],
+                [[]],
+                [[]],
+                [[]],
+                [[]],
+                [[]],
+                [[]],
                 [[]],
                 [[]],
                 [[]],
                 [[]],
                 [[]],
             },
+            footer = {}, --your footer
             center = {
                 {
                     icon = ' ',
@@ -51,7 +58,7 @@ function P.config()
                     desc = 'Explorer',
                     key = 'e',
                     keymap = 'SPC e',
-                    action = "NvimTreeOpen"
+                    action = "NvimTreeToggle"
                 },
                 {
                     icon = '󰊄 ',
@@ -81,6 +88,12 @@ function P.config()
                     action = "Lazy"
                 },
                 {
+                    icon = ' ',
+                    desc = 'Mason',
+                    key = 'm',
+                    action = "Mason"
+                },
+                {
                     icon = ' ',
                     desc = 'Projects',
                     key = 'p',
@@ -93,7 +106,6 @@ function P.config()
                     action = "qa"
                 },
             },
-            footer = {} --your footer
         }
     })
 end
