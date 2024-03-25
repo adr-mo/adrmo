@@ -14,7 +14,7 @@ disabled = true
 
 [username]
 style_root = "red bold"
-format = " [$user](bold green) "
+format = "[$user](bold green) "
 disabled = false
 show_always = true
 
