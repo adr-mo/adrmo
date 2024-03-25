@@ -1,14 +1,12 @@
-local Plugin = {
-    'rcarriga/nvim-notify'
+return {
+    'rcarriga/nvim-notify',
+    config = function()
+        local notify = require('notify')
+        notify.setup({
+            render = 'wrapped-compact',
+            stages = 'fade',
+            top_down = false
+        })
+        vim.notify = notify
+    end
 }
-
-function Plugin.config()
-    local notify = require('notify')
-    notify.setup({
-        render = 'wrapped-compact',
-        stages = 'slide'
-    })
-    vim.notify = notify
-end
-
-return Plugin

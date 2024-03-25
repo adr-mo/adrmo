@@ -1,12 +1,13 @@
 return {
     "nvim-lualine/lualine.nvim",
     config = function()
+        local icons = require('config.icons')
         require("lualine").setup({
             options = {
                 component_separators = "",
-                section_separators = { left = "", right = "" },
+                section_separators = { left = icons.ui.VerticalBlock, right = icons.ui.VerticalBlock },
                 theme = 'auto',
-                disabled_filetypes = { 'NVimTree', 'dapui_breakpoints' },
+                disabled_filetypes = { 'alpha', 'NvimTree', 'dapui_breakpoints' },
                 -- if we want to disable for any other filetype just :echo &ft to get the name
                 ignore_focus = {
                     "dapui_watches", "dapui_breakpoints",
@@ -16,37 +17,55 @@ return {
             },
             sections = {
                 lualine_a = {
-                    { "mode", separator = { left = "█", right = "" }, icon = "" },
+                    {
+                        "mode",
+                        separator = {
+                            left = icons.ui.VerticalBlock,
+                            right = icons.ui.VerticalBlock,
+                        },
+                        icon = icons.ui.Neovim
+                    },
                 },
                 lualine_b = {
-                    {
-                        "filetype",
-                        icon_only = true,
-                        padding = { left = 1, right = 0 },
-                    },
                     "filename",
                 },
                 lualine_c = {
                     {
                         "branch",
-                        icon = "",
+                        icon = icons.git.Branch,
                     },
                     {
                         "diff",
-                        symbols = { added = " ", modified = " ", removed = " " },
-                        colored = false,
+                        symbols = {
+                            added = icons.git.LineAdded .. " ",
+                            modified = icons.git.LineModified .. " ",
+                            removed = icons.git.LineRemoved .. " "
+                        },
+                        colored = true,
                     },
                 },
                 lualine_x = {
                     {
                         "diagnostics",
-                        symbols = { error = " ", warn = " ", info = " ", hint = "" },
+                        symbols = {
+                            error = icons.diagnostics.Error .. " ",
+                            warn = icons.diagnostics.Warning .. " ",
+                            info = icons.diagnostics.Info .. " ",
+                            hint = icons.diagnostics.Hint .. " ",
+                        },
                         update_in_insert = true,
                     },
                 },
-                lualine_y = { clients_lsp },
+                -- lualine_y = { clients_lsp },
+                lualine_y = {
+                    {
+                        "filetype",
+                        icon_only = false,
+                        padding = { left = 0, right = 1 },
+                    }
+                },
                 lualine_z = {
-                    { "location", separator = { left = "", right = "█" }, icon = "" },
+                    { "location", separator = { left = icons.ui.VerticalBlock, right = icons.ui.VerticalBlock }, icon = "" },
                 },
             },
             inactive_sections = {

@@ -1,12 +1,10 @@
-local P = {
+return {
     "szw/vim-maximizer",
+    keys = {
+        { "<leader>sm", ":MaximizerToggle<CR>", desc = 'Maximize split' }
+    },
+    config = function()
+        vim.g.maximizer_set_default_mapping = 0
+        vim.g.maximizer_default_mapping_key = ''
+    end
 }
-
-function P.config()
-    vim.g.maximizer_set_default_mapping = 0
-    vim.g.maximizer_default_mapping_key = ''
-    -- keymap to mqximize the curremt split
-    vim.keymap.set("n", "<leader>sm", ":MaximizerToggle<CR>")
-end
-
-return P

@@ -116,8 +116,10 @@ return {
         LeftPill = '',
         VerticalLine = '|',
         VerticalLineThick = '┃',
+        VerticalBlock = '█',
         VerticalDottedLine = '',
         VerticalDottedLineThick = '󰇙',
         Telescope = "",
+        Neovim = ""
     }
 }

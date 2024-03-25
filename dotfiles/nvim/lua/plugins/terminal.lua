@@ -13,7 +13,6 @@ return {
                 vim.api.nvim_set_option_value("foldmethod", "manual", { scope = "local" })
                 vim.api.nvim_set_option_value("foldexpr", "0", { scope = "local" })
             end,
-            highlights = require("rose-pine.plugins.toggleterm")
         }
         vim.keymap.set('n', '<leader>tt', "<cmd>ToggleTerm direction=float<CR>", { desc = 'Open terminal' }) -- Floating terminal
     end

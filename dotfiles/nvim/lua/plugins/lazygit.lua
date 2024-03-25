@@ -1,9 +1,7 @@
-local P = {
+return {
     "kdheepak/lazygit.nvim",
+    config = true,
+    keys = {
+        { '<leader>g', '<cmd>:LazyGit<cr>' }
+    }
 }
-
-function P.config()
-    vim.keymap.set('n', '<leader>g', '<cmd>:LazyGit<cr>')
-end
-
-return P

@@ -1,174 +1,93 @@
-local P = {
+return {
     "nvim-telescope/telescope.nvim",
-    tag = "0.1.4",
+    tag = "0.1.6",
     dependencies = {
         "nvim-lua/plenary.nvim",
-        "nvim-telescope/telescope-media-files.nvim",
         "nvim-telescope/telescope-fzf-native.nvim",
         "nvim-telescope/telescope-live-grep-args.nvim",
         "benfowler/telescope-luasnip.nvim",
-        "nvim-telescope/telescope-github.nvim",
-        "tpope/vim-fugitive",
-        'tpope/vim-rhubarb',
-        "aaronhallaert/advanced-git-search.nvim",
-        "lpoto/telescope-docker.nvim",
         'nvim-telescope/telescope-dap.nvim',
-        'LukasPietzschmann/telescope-tabs',
-    }
-}
+    },
+    keys = {
+        { '<leader>fb',  "<cmd>Telescope buffers <CR>",                                                         desc = "Telescope Buffers" },
+        { '<leader>fg',  "<cmd>lua require('telescope.builtin').live_grep({ additional_args = { '-j1' }})<CR>", desc = "Telescope live grep" },
+        { '<leader>fo',  "<cmd>Telescope oldfiles <CR>",                                                        desc = "Telescope oldfiles" },
+        { '<leader>fs',  "<cmd>Telescope lsp_document_symbols ignore_symbols=variable,function<CR>",            desc = "Telescope LSP symbols" },
+        { '<leader>ff',  "<cmd>Telescope find_files <CR>",                                                      desc = "Telescope find files" },
+        { '<leader>fk',  "<cmd>Telescope keymaps <CR>",                                                         desc = "Telescope keymaps" },
+        { '<leader>fc',  "<cmd>Telescope commands <CR>",                                                        desc = "Telescope commands" },
+        { '<leader>ft',  "<cmd>Telescope treesitter <CR>",                                                      desc = "Telescope Treesitter" },
+        { '<leader>fC',  "<cmd>Telescope colorscheme <CR>",                                                     desc = "Telescope colorscheme" },
+        { '<leader>fl',  "<cmd>Telescope luasnip <CR>",                                                         desc = "Telescope luasnip" },
+        { '<leader>dap', '<cmd>lua require("telescope").extensions.dap.commands{}<CR>',                         desc = "Telescope dap" },
+    },
+    config = function()
+        local telescope = require('telescope')
+        local actions = require('telescope.actions')
+        local action_layout = require("telescope.actions.layout")
+        local icons = require("config.icons")
 
-function P.config()
-    vim.keymap.set('n', '<leader>fb', "<cmd>Telescope buffers <CR>")
-    vim.keymap.set('n', '<leader>fg',
-        "<cmd>lua require('telescope.builtin').live_grep({ additional_args = { '-j1' }})<CR>")
-    vim.keymap.set('n', '<leader>fo', "<cmd>lua require('telescope.builtin').oldfiles()<CR>")
-    vim.keymap.set('n', '<leader>fs', '<cmd>Telescope lsp_document_symbols ignore_symbols=variable,function<CR>')
-    vim.keymap.set('n', '<leader>ff', '<cmd>Telescope find_files <CR>')
-    vim.keymap.set("n", "<leader>fk", "<cmd>Telescope keymaps <cr>")
-    vim.keymap.set("n", "<leader>fc", "<cmd>Telescope commands <cr>")
-    vim.keymap.set("n", "<leader>ft", "<cmd>Telescope treesitter <cr>")
-    vim.keymap.set("n", "<leader>fC", "<cmd>Telescope colorscheme <cr>")
-    vim.keymap.set("n", "<leader>fl", "<cmd>Telescope luasnip <cr>")
-    vim.keymap.set("n", "<leader>fG", "<cmd>Telescope gh pull_request <cr>")
-    vim.keymap.set('n', '<leader>fi', '<cmd>AdvancedGitSearch<CR>', { desc = "AdvancedGitSearch" })
-    vim.keymap.set('n', '<leader>dk', '<cmd>Telescope docker<CR>', { desc = 'Docker' })
-    vim.keymap.set("n", "<leader>dap", '<cmd>lua require("telescope").extensions.dap.commands{}<CR>',
-        { desc = 'Dap' })
+        telescope.load_extension("fzf")
+        telescope.load_extension('live_grep_args')
+        telescope.load_extension('luasnip')
+        telescope.load_extension('dap')
+        telescope.setup({
+            defaults = {
+                prompt_prefix = " " .. icons.ui.Telescope .. " ",
+                -- path_display = { truncate = 1 },
+                path_display = { "absolute" },
+                color_devicons = true,
+                selection_caret = icons.ui.ChevronRight .. " ",
+                border = true,
+                selection_strategy = "reset",
+                sorting_strategy = "ascending",
 
-    local telescope = require('telescope')
-    local actions = require('telescope.actions')
-    telescope.load_extension("media_files")
-    telescope.load_extension("fzf")
-    telescope.load_extension('live_grep_args')
-    telescope.load_extension('luasnip')
-    telescope.load_extension('gh')
-    telescope.load_extension('advanced_git_search')
-    telescope.load_extension('docker')
-    telescope.load_extension('dap')
-
-    telescope.setup({
-        defaults = {
-            prompt_prefix = '   ',
-            path_display = { truncate = 1 },
-            selection_caret = '  ',
-            border = true,
-            layout_config = {
-                prompt_position = 'top',
-            },
-            sorting_strategy = 'ascending',
-            vimgrep_arguments = {
-                "rg",
-                "--no-heading",
-                "--with-filename",
-                "--line-number",
-                "--column",
-                "--follow",
-                "--smart-case",
-            },
-            mappings = {
-                i = {
-                    ['<C-k>'] = actions.move_selection_previous,
-                    ['<C-j>'] = actions.move_selection_next,
-                    ['<C-d>'] = actions.delete_buffer,
-                    ["<esc>"] = actions.close,
+                vimgrep_arguments = {
+                    "rg",
+                    "--no-heading",
+                    "--with-filename",
+                    "--line-number",
+                    "--column",
+                    "--follow",
+                    "--smart-case",
                 },
-            },
-            file_ignore_patterns = { '.git/', 'node_modules/' },
-            -- initial_mode = 'normal',
-        },
-        pickers = {
-            find_files = {
-                theme = 'dropdown',
-                prompt_title = 'Lookup files',
-                hidden = true,
-                previewer = false,
-                layout_strategy = 'vertical',
-                layout_config = {
-                    prompt_position = 'bottom',
-                    vertical = { width = 0.9, height = 0.9 }
-                },
-                sorting_strategy = 'descending',
-            },
-            buffers = {
-                theme = 'dropdown',
-                prompt_title = 'Lookup buffers',
-                hidden = true,
-                previewer = false,
-                layout_strategy = 'vertical',
-                layout_config = {
-                    prompt_position = 'bottom',
-                    vertical = { width = 0.9, height = 0.9 }
-                },
-                sorting_strategy = 'descending',
                 mappings = {
+                    n = {
+                        ["<M-p>"] = action_layout.toggle_preview
+                    },
                     i = {
-                        ["<c-d>"] = actions.delete_buffer + actions.move_to_top,
-                    }
-                }
-            },
-            oldfiles = {
-                previewer = false,
-                theme = 'dropdown',
-                hidden = true,
-                layout_strategy = 'vertical',
-                layout_config = {
-                    prompt_position = 'bottom',
-                    vertical = { width = 0.9, height = 0.9 }
+                        ["<C-p>"] = action_layout.toggle_preview,
+                        ['<C-k>'] = actions.move_selection_previous,
+                        ['<C-j>'] = actions.move_selection_next,
+                        ["<esc>"] = actions.close,
+                    },
                 },
-                sorting_strategy = 'descending',
-                prompt_title = 'Recent files',
-            },
-            lsp_references = {
-                previewer = true,
-                theme = 'dropdown',
-                hidden = true,
-                layout_strategy = 'horizontal',
+                file_ignore_patterns = { '.git/', 'node_modules/' },
+                -- initial_mode = 'normal',
                 layout_config = {
-                    prompt_position = 'bottom',
-                    horizontal = { width = 0.9, height = 0.9 }
+                    horizontal = {
+                        prompt_position = "top",
+                        preview_width = 0.55,
+                        results_width = 0.8,
+                    },
+                    vertical = {
+                        mirror = false,
+                    },
+                    width = 0.85,
+                    height = 0.92,
+                    preview_cutoff = 120,
                 },
-                sorting_strategy = 'descending',
-                prompt_title = 'LSP references',
             },
-            lsp_definitions = {
-                previewer = true,
-                theme = 'dropdown',
-                hidden = true,
-                layout_strategy = 'vertical',
-                layout_config = {
-                    prompt_position = 'bottom',
-                    vertical = { width = 0.9, height = 0.9 }
+            pickers = {
+                buffers = {
+                    initial_mode = "normal"
                 },
-                sorting_strategy = 'descending',
-                prompt_title = 'LSP definitions',
-            },
-            lsp_document_symbols = {
-                theme = 'dropdown',
-                hidden = true,
-                layout_strategy = 'horizontal',
-                layout_config = {
-                    prompt_position = 'bottom',
-                    horizontal = { width = 0.9, height = 0.9 }
+                oldfiles = {
+                    initial_mode = "normal"
                 },
-                sorting_strategy = 'descending',
-                prompt_title = 'Document symbols',
-                previewer = true
             },
-        },
-        extensions = {
-            -- NOTE: this setup is optional
-            docker = {
-                -- These are the default values
-                theme = "ivy",
-                binary = "docker", -- in case you want to use podman or something
-                compose_binary = "docker compose",
-                buildx_binary = "docker buildx",
-                machine_binary = "docker-machine",
-                log_level = vim.log.levels.INFO,
-                init_term = "tabnew", -- "vsplit new", "split new", ...
-            },
-        },
-    })
-end
-
-return P
+            extensions = {
+            }
+        })
+    end
+}

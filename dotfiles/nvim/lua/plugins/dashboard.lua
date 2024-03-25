@@ -1,113 +1,46 @@
-local P = {
-    'glepnir/dashboard-nvim',
-    dependencies = { 'nvim-tree/nvim-web-devicons' },
+return {
+    "goolord/alpha-nvim",
+    -- cmd = "Alpha",
     event = 'VimEnter',
-}
-
-function P.config()
-    local d = require('dashboard')
-    d.setup({
-        theme = 'doom',
-        week_header = {
-            enable = true,
-        },
-        config = {
-            header = {
-                [[]],
-                [[]],
-                [[]],
-                [[]],
-                [[]],
-                [[]],
-                [[]],
-                [[]],
-                [[]],
-                [[]],
-                [[]],
-                [[]],
-                [[]],
-                [[]],
-                [[]],
-                [[]],
-                [[]],
-                [[]],
-                [[]],
-                [[]],
-            },
-            footer = {}, --your footer
-            center = {
-                {
-                    icon = ' ',
-                    desc = 'New file',
-                    desc_hl = 'String',
-                    key = 'n',
-                    action = 'ene | startinsert'
-                },
-                {
-                    icon = ' ',
-                    icon_hl = 'Title',
-                    desc = 'Find File',
-                    desc_hl = 'String',
-                    key = 'f',
-                    keymap = 'SPC f f',
-                    key_hl = 'Number',
-                    action = 'Telescope find_files'
-                },
-                {
-                    icon = ' ',
-                    desc = 'Explorer',
-                    key = 'e',
-                    keymap = 'SPC e',
-                    action = "NvimTreeToggle"
-                },
-                {
-                    icon = '󰊄 ',
-                    desc = 'Find text',
-                    key = 't',
-                    keymap = 'SPC f g',
-                    action = "lua require('telescope.builtin').live_grep({ additional_args = { '-j1' }})"
-                },
-                {
-                    icon = '󱝥 ',
-                    desc = 'Recently edited',
-                    key = 'r',
-                    keymap = 'SPC f h',
-                    action = "Telescope oldfiles"
-                },
-                {
-                    icon = ' ',
-                    desc = 'Lazygit',
-                    key = 'g',
-                    keymap = 'SPC g',
-                    action = "LazyGit"
-                },
-                {
-                    icon = ' ',
-                    desc = 'Lazy',
-                    key = 'l',
-                    action = "Lazy"
-                },
-                {
-                    icon = ' ',
-                    desc = 'Mason',
-                    key = 'm',
-                    action = "Mason"
-                },
-                {
-                    icon = ' ',
-                    desc = 'Projects',
-                    key = 'p',
-                    action = "Telescope projects"
-                },
-                {
-                    icon = '󰩈 ',
-                    desc = 'Exit',
-                    key = 'q',
-                    action = "qa"
-                },
-            },
+    -- setup header and buttonts
+    opts = function()
+        local dashboard = require "alpha.themes.dashboard"
+        dashboard.section.header.val = {
+            '                                                     ',
+            '  ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗ ',
+            '  ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║ ',
+            '  ██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║ ',
+            '  ██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║ ',
+            '  ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║ ',
+            '  ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝ ',
+            '                                                     ',
         }
-    })
-end
 
-return P
+        dashboard.section.header.opts.hl = "DashboardHeader"
+        vim.cmd "highlight DashboardHeader guifg=#f6c177"
+
+        -- Buttons
+        dashboard.section.buttons.val = {
+            dashboard.button("n", " New     ", "<cmd>ene | startinsert<CR>"),
+            dashboard.button("e", " Explorer     ", "<cmd>NvimTreeToggle<CR>"),
+            dashboard.button("f", " Files     ", "<cmd>Telescope find_files<CR>"),
+            dashboard.button("r", "󱝥 Recent  ", "<cmd>Telescope oldfiles<CR>"),
+            dashboard.button("t", "󰊄 Search  ", "<cmd>Telescope live_grep<CR>"),
+            dashboard.button("p", " Projects", "<cmd>Telescope projects<CR>"),
+            dashboard.button("l", " Mason", "<cmd>Mason<CR>"),
+            dashboard.button("m", " Lazy", "<cmd>Lazy<CR>"),
+            dashboard.button("q", "󰩈 Quit", "<cmd>exit<CR>"),
+        }
+
+        ---- Vertical margins
+        dashboard.config.layout[1].val =
+            vim.fn.max { 2, vim.fn.floor(vim.fn.winheight(0) * 0.10) } -- Above header
+        dashboard.config.layout[3].val =
+            vim.fn.max { 2, vim.fn.floor(vim.fn.winheight(0) * 0.10) } -- Above buttons
+
+        return dashboard
+    end,
+    config = function(_, opts)
+        require("alpha").setup(opts.config)
+    end,
+}
